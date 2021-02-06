@@ -1,0 +1,9 @@
+.nav {
+  min-height: 100px;
+}
+
+.nav a,
+.nav a:active {
+  color: #fff !important;
+  text-decoration: none;
+}

@@ -1,5 +1,6 @@
 .footer {
   min-height: 30%;
-  background-color: tomato;
+  background-color: #70ad47;
   flex-shrink: 0;
+  color: #000;
 }
