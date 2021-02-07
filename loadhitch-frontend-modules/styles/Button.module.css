@@ -1,8 +1,18 @@
 .button {
-  background-color: darkgreen;
+  background-color: #405b23;
   color: #000;
+  width: 300px;
+  height: 100px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .button:hover {
-  background-color: lightgreen;
+  background-color: #92d050;
   color: #000;
+  cursor: pointer;
+}
+.button h4 {
+  font-size: 3rem;
 }
