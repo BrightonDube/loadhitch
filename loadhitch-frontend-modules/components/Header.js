@@ -9,11 +9,11 @@ const Header = () => (
         <h1>Your On-demand Road Freight Partner</h1>
         <h2>I am a</h2>
 
-        <Row xs={1} md={2} className="no-gutters">
-          <Col xs={12} md={6} className="justify-content-center">
-            <Button title="Shipper" href="/shipper" className="ml-auto" />
+        <Row xs={1} md={2} className="no-gutters text-center">
+          <Col className={styles.btn_col}>
+            <Button title="Shipper" href="/shipper" className="mx-auto" />
           </Col>
-          <Col xs={12} md={6} className="align-content-center">
+          <Col className={styles.btn_col}>
             <Button title="Carrier" href="/carrier" />
           </Col>
         </Row>

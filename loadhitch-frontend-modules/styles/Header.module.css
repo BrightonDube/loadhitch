@@ -31,3 +31,9 @@
   color: #ffd;
   font-weight: 900;
 }
+.btn_col {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 10px;
+}
