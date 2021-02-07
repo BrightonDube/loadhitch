@@ -26,10 +26,10 @@ const Footer = () => {
                 <Link href="/benefits">Benefits</Link>
               </li>
               <li>
-                <Link href="/services">Industry</Link>
+                <Link href="/industry">Industry</Link>
               </li>
               <li>
-                <Link href="/services">FAQs</Link>
+                <Link href="/faqs">FAQs</Link>
               </li>
             </ul>
           </Col>
@@ -43,10 +43,10 @@ const Footer = () => {
                 <Link href="/benefits">Benefits</Link>
               </li>
               <li>
-                <Link href="/services">Trip Planner</Link>
+                <Link href="/planner">Trip Planner</Link>
               </li>
               <li>
-                <Link href="/services">FAQs</Link>
+                <Link href="/faqs">FAQs</Link>
               </li>
             </ul>
           </Col>
@@ -67,7 +67,7 @@ const Footer = () => {
           <Col md={6} lg={3} className="text-center text-md-left">
             <h3 className="connect">CONNECT</h3>
             <a href="https://facebook.com">
-              <FontAwesomeIcon icon={faFacebook} size="2x" />
+              <FontAwesomeIcon icon={faFacebook} size="1x" />
             </a>
             <a href="https://instagram.com">
               <FontAwesomeIcon icon={faInstagram} size="2x" />

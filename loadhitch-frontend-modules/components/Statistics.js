@@ -1,4 +1,4 @@
-import { Container, Row, Column } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 const Statistics = () => {
   return (
     <Container>
@@ -7,7 +7,7 @@ const Statistics = () => {
       </Row>
       <style jsx>{`
         .stats {
-          min-height: 40%;
+          height: 100px;
           background-color: #ff0000;
         }
       `}</style>
