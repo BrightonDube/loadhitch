@@ -1,11 +1,10 @@
-import Truck from "../public/truck.jpg";
 const Header = () => (
   <div>
     <div className="bg"></div>
     <style jsx>
       {`
         .bg {
-          background-image: url();
+          background-image: url(" + ${require("../public/truck.jpg")} + ");
 
           /* Full height */
           height: 100vh;
