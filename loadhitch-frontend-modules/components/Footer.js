@@ -67,16 +67,16 @@ const Footer = () => {
           <Col md={6} lg={3} className="text-center text-md-left">
             <h3 className="connect">CONNECT</h3>
             <a href="https://facebook.com">
-              <FontAwesomeIcon icon={faFacebook} size="1x" />
+              <FontAwesomeIcon icon={faFacebook} width="1.5em" />
             </a>
             <a href="https://instagram.com">
-              <FontAwesomeIcon icon={faInstagram} size="2x" />
+              <FontAwesomeIcon icon={faInstagram} width="1.5em" />
             </a>
             <a href="https://twitter.com">
-              <FontAwesomeIcon icon={faTwitter} size="2x" />
+              <FontAwesomeIcon icon={faTwitter} width="1.5em" />
             </a>
             <a href="https://linkedIn.com">
-              <FontAwesomeIcon icon={faLinkedin} size="2x" />
+              <FontAwesomeIcon icon={faLinkedin} width="1.5em" />
             </a>
           </Col>
         </Row>

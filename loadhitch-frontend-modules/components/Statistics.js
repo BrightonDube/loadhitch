@@ -1,18 +1,6 @@
-import { Container, Row, Col } from "react-bootstrap";
+import styles from "../styles/Statistics.module.css";
 const Statistics = () => {
-  return (
-    <Container>
-      <Row className="stats">
-        <Col></Col>
-      </Row>
-      <style jsx>{`
-        .stats {
-          height: 100px;
-          background-color: #ff0000;
-        }
-      `}</style>
-    </Container>
-  );
+  return <div className={styles.stats}></div>;
 };
 
 export default Statistics;

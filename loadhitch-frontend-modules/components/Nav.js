@@ -9,12 +9,17 @@ const Navi = () => {
       <Container fluid>
         <Link href="/" passHref>
           <Navbar.Brand>
-            <h2>LOADHITCH</h2>
+            <img
+              src="/logo.png"
+              width="300"
+              className="d-inline-block align-top"
+              alt="Loadhitch logo"
+            />
           </Navbar.Brand>
         </Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="mr-auto">
+          <Nav className="ml-auto">
             <Link
               href="/"
               passHref

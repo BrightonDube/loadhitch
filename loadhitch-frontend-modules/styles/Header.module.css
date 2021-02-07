@@ -25,3 +25,9 @@
   font-weight: bolder;
   color: #ffd;
 }
+.bg_inner h2 {
+  margin: 50px auto;
+  font-size: 3em;
+  color: #ffd;
+  font-weight: 900;
+}
