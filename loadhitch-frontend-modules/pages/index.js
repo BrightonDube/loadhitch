@@ -13,11 +13,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Row className="header no-gutters">
-        <Col>
-          <Header />
-        </Col>
-      </Row>
+      <Header />
     </>
   );
 }

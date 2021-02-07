@@ -1,20 +1,12 @@
+import styles from "../styles/Header.module.css";
+import { Row, Button } from "react-bootstrap";
 const Header = () => (
-  <div>
-    <div className="bg"></div>
-    <style jsx>
-      {`
-        .bg {
-          background-image: url(" + ${require("../public/truck.jpg")} + ");
-
-          /* Full height */
-          height: 100vh;
-
-          background-position: center;
-          background-repeat: no-repeat;
-          background-size: cover;
-        }
-      `}
-    </style>
-  </div>
+  <Row className="no-gutters text-center">
+    <div className={styles.bg}>
+      <div className={styles.bg_inner}>
+        <h1 className="mt-5">Your On-demand Road Freight Partner</h1>
+      </div>
+    </div>
+  </Row>
 );
 export default Header;
