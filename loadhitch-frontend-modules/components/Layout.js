@@ -1,7 +1,7 @@
 import React from "react";
 import Navi from "./Nav";
 import Footer from "./Footer";
-import styles from "../styles/Home.module.css";
+import styles from "../styles/Layout.module.css";
 
 const Layout = ({ children }) => {
   return (

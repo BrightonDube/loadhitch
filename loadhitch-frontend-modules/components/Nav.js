@@ -1,43 +1,82 @@
 import Link from "next/link";
-import styles from "../styles/Nav.module.css";
-import { Navbar, NavDropdown, Nav } from "react-bootstrap";
+import { useRouter } from "next/router";
+import { Container, Navbar, NavDropdown, Nav } from "react-bootstrap";
 
 const Navi = () => {
+  const router = useRouter();
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" className="">
-      <Link href="/">
-        {" "}
-        <Navbar.Brand>Loadhitch</Navbar.Brand>
-      </Link>
-
-      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-      <Navbar.Collapse id="responsive-navbar-nav">
-        <Nav className="mr-auto">
-          <Link href="/mypage">
-            <Nav.Link as="a" href="/mypage">
-              My Page
-            </Nav.Link>
-          </Link>
-          <Nav.Link href="#pricing">Pricing</Nav.Link>
-          <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.2">
-              Another action
-            </NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-            <NavDropdown.Divider />
-            <NavDropdown.Item href="#action/3.4">
-              Separated link
-            </NavDropdown.Item>
-          </NavDropdown>
-        </Nav>
-        <Nav>
-          <Nav.Link href="#deets">More deets</Nav.Link>
-          <Nav.Link eventKey={2} href="#memes">
-            Dank memes
-          </Nav.Link>
-        </Nav>
-      </Navbar.Collapse>
+    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      <Container fluid>
+        <Link href="/" passHref>
+          <Navbar.Brand>
+            <h2>LOADHITCH</h2>
+          </Navbar.Brand>
+        </Link>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="mr-auto">
+            <Link
+              href="/"
+              passHref
+              className={router.pathname == "/" ? "active" : ""}
+            >
+              <Nav.Link as="a" href="/">
+                Home
+              </Nav.Link>
+            </Link>
+            <Link
+              href="/pricing"
+              passHref
+              className={router.pathname == "/pricing" ? "active" : ""}
+            >
+              <Nav.Link as="a" href="/pricing">
+                Pricing
+              </Nav.Link>
+            </Link>
+            <NavDropdown title="" id="collasible-nav-dropdown">
+              <Link
+                href="/services"
+                passHref
+                className={router.pathname == "/services" ? "active" : ""}
+              >
+                <NavDropdown.Item href="/services">Services</NavDropdown.Item>
+              </Link>
+              <Link
+                href="/careers"
+                passHref
+                className={router.pathname == "/careers" ? "active" : ""}
+              >
+                <NavDropdown.Item href="/careers">Careers</NavDropdown.Item>
+              </Link>
+              <Link
+                href="/about"
+                passHref
+                className={router.pathname == "/about" ? "active" : ""}
+              >
+                <NavDropdown.Item href="/about">About</NavDropdown.Item>
+              </Link>
+            </NavDropdown>
+          </Nav>
+          <Nav>
+            <Link
+              href="/register"
+              passHref
+              className={router.pathname == "/register" ? "active" : ""}
+            >
+              <Nav.Link href="/register">Sign up</Nav.Link>
+            </Link>
+            <Link
+              href="/login"
+              passHref
+              className={router.pathname == "/login" ? "active" : ""}
+            >
+              <Nav.Link eventKey={2} href="/login">
+                Sign in
+              </Nav.Link>
+            </Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
     </Navbar>
   );
 };

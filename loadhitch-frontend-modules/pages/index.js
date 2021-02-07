@@ -1,21 +1,23 @@
 import Head from "next/head";
-import styles from "../styles/Home.module.css";
+import Image from "next/image";
 
-import { Container, Row, Col } from "react-bootstrap";
+import styles from "../styles/Home.module.css";
+import { Row, Col } from "react-bootstrap";
+import Header from "../components/Header";
 
 export default function Home() {
   return (
-    <Container>
+    <>
       <Head>
         <title>Loadhitch Home</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Row>
-        <Col>Col 1</Col>
-
-        <Col>Col 2</Col>
+      <Row className="header no-gutters">
+        <Col>
+          <Header />
+        </Col>
       </Row>
-    </Container>
+    </>
   );
 }
