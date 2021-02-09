@@ -1,10 +1,7 @@
 import Head from "next/head";
-import Image from "next/image";
-
-import styles from "../styles/Home.module.css";
-import { Row, Col } from "react-bootstrap";
 import Header from "../components/Header";
 import Statistics from "../components/Statistics";
+import Video from "../components/Video";
 
 export default function Home() {
   return (
@@ -15,6 +12,7 @@ export default function Home() {
       </Head>
 
       <Header />
+      <Video />
       <Statistics />
     </>
   );
