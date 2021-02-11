@@ -3,9 +3,9 @@ import { Col, Row } from "react-bootstrap";
 import styles from "../styles/Video.module.css";
 const Video = () => {
   return (
-    <Row className="no-gutters">
-      <Col className="text-center justify-content-center">
-        <h1 className="justify-self-center">How it works</h1>
+    <Row className={`no-gutters ${styles.container}`}>
+      <Col className={`text-center align-items-center ${styles.text_wrapper}`}>
+        <h1 className="">How it works</h1>
       </Col>
       <Col>
         <div className={styles.wrapper}>

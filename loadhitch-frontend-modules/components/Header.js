@@ -1,7 +1,6 @@
 import styles from "../styles/Header.module.css";
 
-import { Row, Col } from "react-bootstrap";
-import Button from "./Button";
+import { Row } from "react-bootstrap";
 import HeaderText from "./HeaderText";
 const Header = () => (
   <div>

@@ -4,4 +4,17 @@
   width: 100%;
   background-color: #fff;
   padding: 20px;
+  height: 100%;
+}
+.text_wrapper {
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
+.text_wrapper h1 {
+  font-size: 4rem;
+}
+.container {
+  min-height: 300px;
 }
