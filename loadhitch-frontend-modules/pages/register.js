@@ -1,11 +1,13 @@
-import React from "react";
+import { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import styles from "../styles/Register.module.css";
 
 const about = () => {
   const onSubmit = (data) => console.log(data);
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors, watch } = useForm();
+  const password = useRef({});
+  password.current = watch("password", "");
   return (
     <div className={styles.formStyle}>
       <Container>
@@ -23,12 +25,16 @@ const about = () => {
                   type="text"
                   placeholder="First Name"
                   name="Name"
-                  ref={register({ required: true, maxLength: 20 })}
+                  ref={register({
+                    required: "Name required",
+                    maxLength: {
+                      value: 30,
+                      message: "character limit reached",
+                    },
+                  })}
                 />
                 {errors.Name && (
-                  <div className={styles.errorsText}>
-                    First name is required
-                  </div>
+                  <div className={styles.errorsText}>{errors.Name.message}</div>
                 )}
               </Form.Group>
               <Form.Group>
@@ -37,10 +43,18 @@ const about = () => {
                   type="text"
                   placeholder="Last Name"
                   name="LName"
-                  ref={register({ required: true, maxLength: 20 })}
+                  ref={register({
+                    required: "Last name is required",
+                    maxLength: {
+                      value: 20,
+                      message: "character limit reached",
+                    },
+                  })}
                 />
                 {errors.LName && (
-                  <div className={styles.errorsText}>Last name is required</div>
+                  <div className={styles.errorsText}>
+                    {errors.LName.message}
+                  </div>
                 )}
               </Form.Group>
 
@@ -52,6 +66,9 @@ const about = () => {
                   name="companyName"
                   ref={register({ required: false, maxLength: 40 })}
                 />
+                {errors.name && errors.name.type === "maxLength" && (
+                  <span>Max length exceeded</span>
+                )}
               </Form.Group>
               <Form.Group>
                 <Form.Control
@@ -59,7 +76,13 @@ const about = () => {
                   type="email"
                   placeholder="Work Email"
                   name="email"
-                  ref={register({ required: true, pattern: /^\S+@\S+$/i })}
+                  ref={register({
+                    required: "valie email is required",
+                    pattern: {
+                      value: /^\S+@\S+$/i,
+                      message: "Enter a valid email address",
+                    },
+                  })}
                 />
                 {errors.email && (
                   <div className={styles.errorsText}>Email is required</div>
@@ -72,11 +95,17 @@ const about = () => {
                   type="tel"
                   placeholder="Mobile Number"
                   name="mobileNumber"
-                  ref={register({ required: true, maxLength: 20 })}
+                  ref={register({
+                    required: "Your mobile number is required",
+                    maxLength: {
+                      value: 30,
+                      message: "character limit reached",
+                    },
+                  })}
                 />
                 {errors.mobileNumber && (
                   <div className={styles.errorsText}>
-                    Your mobile number is required
+                    {errors.mobileNumber.message}
                   </div>
                 )}
               </Form.Group>
@@ -86,7 +115,7 @@ const about = () => {
                   defaultValue={null}
                   size="lg"
                   name="role"
-                  ref={register({ required: true, maxLength: 20 })}
+                  ref={register({ required: "Role is required" })}
                 >
                   <option>Your role can be best described as</option>
                   <option value="owner operator">Owner Operator</option>
@@ -96,7 +125,7 @@ const about = () => {
                   <option value="other">Other</option>
                 </Form.Control>
                 {errors.role && (
-                  <div className={styles.errorsText}>Role is required</div>
+                  <div className={styles.errorsText}>{errors.role.message}</div>
                 )}
               </Form.Group>
 
@@ -198,12 +227,10 @@ const about = () => {
                   type="text"
                   placeholder="CVOR Number"
                   name="cvor"
-                  ref={register({ required: true })}
+                  ref={register({ required: "CVOR number is required" })}
                 />
                 {errors.cvor && (
-                  <div className={styles.errorsText}>
-                    CVOR number is required
-                  </div>
+                  <div className={styles.errorsText}>{errors.cvor.message}</div>
                 )}
                 <Form.Group></Form.Group>
               </Form.Group>
@@ -214,14 +241,29 @@ const about = () => {
                   size="lg"
                   name="password"
                   ref={register({
-                    required: true,
-                    minLength: 8,
-                    maxLength: 20,
+                    required: "Password required",
+
+                    minLength: {
+                      value: 8,
+                      message: "Password must be at least 8 characters long",
+                    },
+                    maxLength: { value: 20, message: "Max length exceeded" },
+                    validate: (value) => {
+                      return (
+                        [
+                          /[a-z]/,
+                          /[A-Z]/,
+                          /[0-9]/,
+                          /[^a-zA-Z0-9]/,
+                        ].every((pattern) => pattern.test(value)) ||
+                        "must include lower, upper, number, and special chars"
+                      );
+                    },
                   })}
                 />
                 {errors.password && (
                   <div className={styles.errorsText}>
-                    Password must be at least 8 characters long
+                    {errors.password.message}
                   </div>
                 )}
               </Form.Group>
@@ -232,14 +274,15 @@ const about = () => {
                   size="lg"
                   name="password2"
                   ref={register({
-                    required: true,
-                    minLength: 8,
-                    maxLength: 20,
+                    required: "confirm password",
+                    validate: (value) =>
+                      value === password.current ||
+                      "The passwords do not match",
                   })}
                 />
                 {errors.password2 && (
                   <div className={styles.errorsText}>
-                    Valid password is required
+                    {errors.password2.message}
                   </div>
                 )}
               </Form.Group>
@@ -249,7 +292,7 @@ const about = () => {
                   defaultValue="email"
                   size="lg"
                   name="medium"
-                  ref={register({ required: true, minLength: 6 })}
+                  ref={register({ required: true })}
                 >
                   <option>
                     Where can we send your login Security Code too?*
@@ -270,7 +313,7 @@ const about = () => {
                     name="terms"
                     ref={register({ required: true })}
                   />
-                  {errors.name && (
+                  {errors.terms && (
                     <div className={styles.errorsText}>
                       You must agree to the terms and conditions
                     </div>
