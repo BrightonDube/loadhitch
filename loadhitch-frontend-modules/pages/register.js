@@ -1,8 +1,11 @@
 import React from "react";
+import { useForm } from "react-hook-form";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import styles from "../styles/Register.module.css";
 
 const about = () => {
+  const onSubmit = (data) => console.log(data);
+  const { register, handleSubmit, errors } = useForm();
   return (
     <div className={styles.formStyle}>
       <Container>
@@ -13,22 +16,36 @@ const about = () => {
         </Row>
         <Row className="justify-content-center w-100 py-5">
           <Col>
-            <Form className="w-50 mx-auto">
+            <Form className="w-50 mx-auto" onSubmit={handleSubmit(onSubmit)}>
               <Form.Group>
                 <Form.Control
                   size="lg"
                   type="text"
                   placeholder="First Name"
-                  required
+                  required="You must enter your name"
+                  name="Name"
+                  ref={register({ required: true, maxLength: 20 })}
                 />
+                {errors ? (
+                  <div className={styles.errorText}>
+                    <p>{errors.name}</p>
+                  </div>
+                ) : null}
               </Form.Group>
               <Form.Group>
                 <Form.Control
                   size="lg"
                   type="text"
                   placeholder="Last Name"
-                  required
+                  required="You must enter your last name"
+                  name="LName"
+                  ref={register({ required: true, maxLength: 20 })}
                 />
+                {errors ? (
+                  <div className={styles.errorText}>
+                    <p>{errors.name}</p>
+                  </div>
+                ) : null}
               </Form.Group>
 
               <Form.Group>
@@ -36,7 +53,8 @@ const about = () => {
                   size="lg"
                   type="text"
                   placeholder="Company Name"
-                  required
+                  name="companyName"
+                  ref={register({ required: false, maxLength: 40 })}
                 />
               </Form.Group>
               <Form.Group>
@@ -44,7 +62,9 @@ const about = () => {
                   size="lg"
                   type="email"
                   placeholder="Work Email"
-                  required
+                  name="email"
+                  required="Enter a valid work email"
+                  ref={register}
                 />
               </Form.Group>
 
@@ -53,15 +73,19 @@ const about = () => {
                   size="lg"
                   type="tel"
                   placeholder="Mobile Number"
-                  required
+                  name="mobileNumber"
+                  required="Enter a valid mobile number"
+                  ref={register}
                 />
               </Form.Group>
               <Form.Group>
                 <Form.Control
                   as="select"
-                  defaultValue="Your role can be best described as"
+                  defaultValue={null}
                   size="lg"
-                  required
+                  name="role"
+                  required="Make a selection"
+                  ref={register}
                 >
                   <option>Your role can be best described as</option>
                   <option>Owner Operator</option>
@@ -75,9 +99,11 @@ const about = () => {
               <Form.Group>
                 <Form.Control
                   as="select"
-                  defaultValue="My Carrier operations is best described as"
+                  defaultValue={null}
                   size="lg"
-                  required
+                  name="operation"
+                  required="make a selection"
+                  ref={register}
                 >
                   <option>My Carrier operations is best described as</option>
                   <option>Within Canadian Border</option>
@@ -88,9 +114,11 @@ const about = () => {
               <Form.Group>
                 <Form.Control
                   as="select"
-                  defaultValue="Please Specify Destination"
+                  defaultValue={null}
                   size="lg"
-                  required
+                  name="destination"
+                  required="make a selection"
+                  ref={register}
                 >
                   <option>Please Specify Destination</option>
                   <option>Mexico</option>
@@ -103,18 +131,34 @@ const about = () => {
                   size="lg"
                   type="text"
                   placeholder="DOT Number"
-                  required
+                  name="dot"
+                  required="DOT Number is required"
+                  ref={register}
                 />
               </Form.Group>
               <Form.Group>
-                <Form.Control as="select" defaultValue="Yes" size="lg" required>
+                <Form.Control
+                  as="select"
+                  defaultValue={null}
+                  size="lg"
+                  name="area"
+                  required
+                  ref={register}
+                >
                   <option>I travel within Ontario</option>
                   <option>YES</option>
                   <option>NO</option>
                 </Form.Control>
               </Form.Group>
               <Form.Group>
-                <Form.Control as="select" defaultValue="Yes" size="lg" required>
+                <Form.Control
+                  as="select"
+                  defaultValue={null}
+                  size="lg"
+                  name="regLocation"
+                  required
+                  ref={register}
+                >
                   <option>
                     My Truck/s is plated in Ontario, Mexico or USA?
                   </option>
@@ -127,7 +171,9 @@ const about = () => {
                   size="lg"
                   type="text"
                   placeholder="CVOR Number"
+                  name="cvor"
                   required
+                  ref={register}
                 />
                 <Form.Group></Form.Group>
               </Form.Group>
@@ -136,6 +182,13 @@ const about = () => {
                   type="password"
                   placeholder="Password"
                   size="lg"
+                  required="Enter a valid password"
+                  name="password"
+                  ref={register({
+                    required: true,
+                    minLength: 8,
+                    maxLength: 20,
+                  })}
                 />
               </Form.Group>
               <Form.Group controlId="formBasicPassword">
@@ -143,6 +196,9 @@ const about = () => {
                   type="password"
                   placeholder="Password"
                   size="lg"
+                  required="required"
+                  name="password2"
+                  ref={register}
                 />
               </Form.Group>
               <Form.Group>
@@ -150,7 +206,9 @@ const about = () => {
                   as="select"
                   defaultValue="email"
                   size="lg"
+                  name="medium"
                   required
+                  ref={register}
                 >
                   <option>
                     Where can we send your login Security Code too?*
@@ -158,6 +216,16 @@ const about = () => {
                   <option>Mobile Number</option>
                   <option>Work Email Address</option>
                 </Form.Control>
+              </Form.Group>
+              <Form.Group as={Row} controlId="formHorizontalCheck">
+                <Col sm={{ span: 10 }}>
+                  <Form.Check
+                    label="Agree to Terms and Conditions"
+                    name="terms"
+                    required
+                    ref={register}
+                  />
+                </Col>
               </Form.Group>
               <Button
                 className={styles.submitButton}

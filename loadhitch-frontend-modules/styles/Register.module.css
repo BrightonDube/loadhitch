@@ -23,11 +23,13 @@
 }
 
 .formStyle ::placeholder {
-  color: #70ad47;
+  color: #9dd379;
 }
 .submitButton {
   color: #000;
   width: 250px;
   background-color: #70ad47;
-  align-self: center;
+}
+.errorsText p {
+  color: red;
 }
