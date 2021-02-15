@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-loadhitchfrontendmod-dev-181315-authRole",
+      "UnauthRoleArn": "arn:aws:iam::065888178065:role/amplify-loadhitchfrontendmod-dev-181315-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::065888178065:role/amplify-loadhitchfrontendmod-dev-181315-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-loadhitchfrontendmod-dev-181315-deployment",
+      "UnauthRoleName": "amplify-loadhitchfrontendmod-dev-181315-unauthRole",
+      "StackName": "amplify-loadhitchfrontendmod-dev-181315",
+      "StackId": "arn:aws:cloudformation:us-east-1:065888178065:stack/amplify-loadhitchfrontendmod-dev-181315/ada78630-6e48-11eb-b3b6-12aa277c08db",
+      "AmplifyAppId": "d1arql9isie1xe"
+    }
+  }
+}
