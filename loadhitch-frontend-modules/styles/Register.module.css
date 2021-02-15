@@ -1,0 +1,35 @@
+.formStyle input:-webkit-autofill,
+.formStyle input:-webkit-autofill:hover,
+.formStyle input:-webkit-autofill:focus,
+.formStyle textarea:-webkit-autofill,
+.formStyle textarea:-webkit-autofill:hover,
+.formStyle textarea:-webkit-autofill:focus,
+.formStyle select:-webkit-autofill,
+.formStyle select:-webkit-autofill:hover,
+.formStyle select:-webkit-autofill:focus {
+  transition: background-color 10000s;
+  -webkit-text-fill-color: #70ad47 !important;
+}
+
+.formStyle,
+.formStyle select:focus,
+.formStyle input:focus,
+.formStyle input,
+.formStyle select,
+.formStyle option {
+  background-color: #000;
+  color: #70ad47;
+  border-color: #70ad47;
+}
+
+.formStyle ::placeholder {
+  color: #9dd379;
+}
+.submitButton {
+  color: #000;
+  width: 250px;
+  background-color: #70ad47;
+}
+.errorsText {
+  color: red;
+}

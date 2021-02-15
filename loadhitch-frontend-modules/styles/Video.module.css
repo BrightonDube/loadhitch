@@ -7,8 +7,7 @@
   height: 100%;
 }
 .text_wrapper {
-  height: 300px;
-  display: flex;
+  min-height: 300px;
   justify-content: center;
   align-self: center;
 }
