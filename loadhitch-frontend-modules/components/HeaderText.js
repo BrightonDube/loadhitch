@@ -13,7 +13,7 @@ const HeaderText = () => {
           <Button title="Shipper" href="/shipper" className="mx-auto" />
         </Col>
         <Col className={styles.btn_col}>
-          <Button title="Carrier" href="/carrier" />
+          <Button title="Carrier" href="/dashboard" />
         </Col>
       </Row>
     </div>

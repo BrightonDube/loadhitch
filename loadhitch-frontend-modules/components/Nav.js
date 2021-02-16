@@ -29,15 +29,15 @@ const Navi = () => {
                 Home
               </Nav.Link>
             </Link>
-            {/* <Link
-              href="/pricing"
+            <Link
+              href="/dashboard"
               passHref
-              className={router.pathname == "/pricing" ? "active" : ""}
+              className={router.pathname == "/dashboard" ? "active" : ""}
             >
-              <Nav.Link as="a" href="/pricing">
-                Pricing
+              <Nav.Link as="a" href="/dashboard">
+                Dashboard
               </Nav.Link>
-            </Link> */}
+            </Link>
             <NavDropdown title="" id="collasible-nav-dropdown">
               <Link
                 href="/services"
