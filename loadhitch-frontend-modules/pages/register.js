@@ -27,44 +27,6 @@ const about = () => {
               <Form.Group>
                 <Form.Control
                   size="lg"
-                  type="text"
-                  placeholder="First Name"
-                  name="Name"
-                  ref={register({
-                    required: "Name required",
-                    maxLength: {
-                      value: 30,
-                      message: "character limit reached",
-                    },
-                  })}
-                />
-                {errors.Name && (
-                  <div className={styles.errorsText}>{errors.Name.message}</div>
-                )}
-              </Form.Group>
-              <Form.Group>
-                <Form.Control
-                  size="lg"
-                  type="text"
-                  placeholder="Last Name"
-                  name="LName"
-                  ref={register({
-                    required: "Last name is required",
-                    maxLength: {
-                      value: 20,
-                      message: "character limit reached",
-                    },
-                  })}
-                />
-                {errors.LName && (
-                  <div className={styles.errorsText}>
-                    {errors.LName.message}
-                  </div>
-                )}
-              </Form.Group>
-              <Form.Group>
-                <Form.Control
-                  size="lg"
                   type="email"
                   placeholder="Work Email"
                   name="email"
