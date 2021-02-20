@@ -16,6 +16,8 @@
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "chart.js": "^2.9.4",
+    "little-state-machine": "^4.0.2",
+    "little-state-machine-devtools": "^2.0.0",
     "next": "10.0.6",
     "react": "17.0.1",
     "react-bootstrap": "^1.4.3",

@@ -27,9 +27,13 @@
 }
 .submitButton {
   color: #000;
-  width: 250px;
+  width: 222px;
   background-color: #70ad47;
 }
 .errorsText {
   color: red;
+}
+.errorsText::before {
+  display: inline;
+  content: "⚠ ";
 }

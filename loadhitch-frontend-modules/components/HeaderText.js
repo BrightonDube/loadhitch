@@ -10,7 +10,11 @@ const HeaderText = () => {
 
       <Row xs={1} md={2} className="no-gutters text-center">
         <Col className={styles.btn_col}>
-          <Button title="Shipper" href="/shipper" className="mx-auto" />
+          <Button
+            title="Shipper"
+            href="/carrier_profile_form"
+            className="mx-auto"
+          />
         </Col>
         <Col className={styles.btn_col}>
           <Button title="Carrier" href="/dashboard" />
