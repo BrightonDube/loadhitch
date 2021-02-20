@@ -1,32 +1,126 @@
-import { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import styles from "../styles/Register.module.css";
 
-const step1 = () => {
-  const { register, handleSubmit, errors, watch } = useForm();
-  const onSubmit = (data, e) => {
-    e.target.reset();
+const CompanyProfile = () => {
+  const { register, handleSubmit, errors } = useForm();
+  const onSubmit = (data) => {
     console.log(data);
   };
-  const password = useRef({});
-  password.current = watch("password", "");
   return (
     <div className={styles.formStyle}>
       <Container>
-        <Row>
-          <Col className="text-center pt-5">
-            <h1>Company Profile</h1>
-          </Col>
-        </Row>
         <Row className="justify-content-center w-100 py-5">
           <Col xs={12} sm={10} md={8}>
             <Form className="w-90 mx-auto" onSubmit={handleSubmit(onSubmit)}>
               <Form.Group>
+                <Form.Label className="mt-3">Company Name</Form.Label>
                 <Form.Control
                   size="lg"
                   type="text"
-                  placeholder="First Name"
+                  placeholder="Company Name"
+                  name="companyName"
+                  ref={register({ required: false, maxLength: 40 })}
+                />
+                {errors.companyName &&
+                  errors.companyName.type === "maxLength" && (
+                    <span>Max length exceeded</span>
+                  )}
+              </Form.Group>
+              <Form.Group controlId="formGridAddress1">
+                <Form.Label className="mt-3">Company Address</Form.Label>
+                <Form.Control
+                  placeholder="Address Line 1"
+                  size="lg"
+                  type="text"
+                  name="address1"
+                  ref={register({
+                    required: "Address required",
+                  })}
+                />
+              </Form.Group>
+              {errors.address && (
+                <div className={styles.errorsText}>
+                  {errors.address.message}
+                </div>
+              )}
+              <Form.Group controlId="formGridAddress2">
+                <Form.Control
+                  placeholder="Address Line 2"
+                  size="lg"
+                  type="text"
+                  name="address2"
+                  ref={register({
+                    required: false,
+                  })}
+                />
+              </Form.Group>
+
+              <Form.Group controlId="formGridCity">
+                <Form.Control
+                  size="lg"
+                  type="text"
+                  placeholder="City"
+                  name="city"
+                  ref={register({
+                    required: "City required",
+                    maxLength: {
+                      value: 30,
+                      message: "character limit reached",
+                    },
+                  })}
+                />
+              </Form.Group>
+
+              <Form.Group controlId="formGridState">
+                <Form.Control
+                  as="select"
+                  defaultValue="Province..."
+                  size="lg"
+                  name="role"
+                  ref={register({ required: "Province is required" })}
+                >
+                  <option>Province...</option>
+                  <option>Saskachewan</option>
+                </Form.Control>
+              </Form.Group>
+
+              <Form.Group controlId="formGridZip">
+                <Form.Control
+                  size="lg"
+                  type="text"
+                  placeholder="Zip Code"
+                  name="zip"
+                  ref={register({
+                    required: "Zip Code required",
+                    maxLength: {
+                      value: 30,
+                      message: "character limit reached",
+                    },
+                  })}
+                />
+              </Form.Group>
+              {errors.zip && (
+                <div className={styles.errorsText}>{errors.zip.message}</div>
+              )}
+              <Form.Group controlId="formGridZip">
+                <Form.Control
+                  size="lg"
+                  type="text"
+                  placeholder="Canada"
+                  value="Canada"
+                  name="country"
+                  ref={register({
+                    required: true,
+                  })}
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Label className="mt-3">Contact Person</Form.Label>
+                <Form.Control
+                  size="lg"
+                  type="text"
+                  placeholder="Full Name"
                   name="Name"
                   ref={register({
                     required: "Name required",
@@ -40,39 +134,7 @@ const step1 = () => {
                   <div className={styles.errorsText}>{errors.Name.message}</div>
                 )}
               </Form.Group>
-              <Form.Group>
-                <Form.Control
-                  size="lg"
-                  type="text"
-                  placeholder="Last Name"
-                  name="LName"
-                  ref={register({
-                    required: "Last name is required",
-                    maxLength: {
-                      value: 20,
-                      message: "character limit reached",
-                    },
-                  })}
-                />
-                {errors.LName && (
-                  <div className={styles.errorsText}>
-                    {errors.LName.message}
-                  </div>
-                )}
-              </Form.Group>
 
-              <Form.Group>
-                <Form.Control
-                  size="lg"
-                  type="text"
-                  placeholder="Company Name"
-                  name="companyName"
-                  ref={register({ required: false, maxLength: 40 })}
-                />
-                {errors.name && errors.name.type === "maxLength" && (
-                  <span>Max length exceeded</span>
-                )}
-              </Form.Group>
               <Form.Group>
                 <Form.Control
                   size="lg"
@@ -103,6 +165,10 @@ const step1 = () => {
                   name="mobileNumber"
                   ref={register({
                     required: "Your mobile number is required",
+                    minLength: {
+                      value: 6,
+                      message: "Must be at least 6 digits",
+                    },
                     maxLength: {
                       value: 30,
                       message: "character limit reached",
@@ -115,67 +181,9 @@ const step1 = () => {
                   </div>
                 )}
               </Form.Group>
-              <Form.Group>
-                <Form.Control
-                  as="select"
-                  defaultValue={null}
-                  size="lg"
-                  name="role"
-                  ref={register({ required: "Role is required" })}
-                >
-                  <option>Your role can be best described as</option>
-                  <option value="owner operator">Owner Operator</option>
-                  <option value="company owner">Company Owner</option>
-                  <option value="dispatcher">Dispatcher</option>
-                  <option value="operations manager">Operations Manager</option>
-                  <option value="other">Other</option>
-                </Form.Control>
-                {errors.role && (
-                  <div className={styles.errorsText}>{errors.role.message}</div>
-                )}
-              </Form.Group>
 
               <Form.Group>
-                <Form.Control
-                  as="select"
-                  defaultValue={null}
-                  size="lg"
-                  name="operation"
-                  ref={register({ required: true })}
-                >
-                  <option>My Carrier operations is best described as</option>
-                  <option value="within">Within Canadian Border</option>
-                  <option value="across">Across Canadian Border</option>
-                  <option value="within and across">
-                    Within and across the Canadian border
-                  </option>
-                </Form.Control>
-                {errors.operation && (
-                  <div className={styles.errorsText}>
-                    Make a valid Selection
-                  </div>
-                )}
-              </Form.Group>
-              <Form.Group>
-                <Form.Control
-                  as="select"
-                  defaultValue={null}
-                  size="lg"
-                  name="destination"
-                  ref={register({ required: true })}
-                >
-                  <option>Please Specify Destination</option>
-                  <option value="Mexico">Mexico</option>
-                  <option value="USA">USA</option>
-                  <option value="both">Mexico and USA</option>
-                </Form.Control>
-                {errors.destination && (
-                  <div className={styles.errorsText}>
-                    Make a valid selection
-                  </div>
-                )}
-              </Form.Group>
-              <Form.Group>
+                <Form.Label className="mt-3">Company Information</Form.Label>
                 <Form.Control
                   size="lg"
                   type="text"
@@ -186,44 +194,6 @@ const step1 = () => {
                 {errors.dot && (
                   <div className={styles.errorsText}>
                     DOT Number is required
-                  </div>
-                )}
-              </Form.Group>
-              <Form.Group>
-                <Form.Control
-                  as="select"
-                  defaultValue={null}
-                  size="lg"
-                  name="area"
-                  ref={register({ required: true })}
-                >
-                  <option>I travel within Ontario</option>
-                  <option value="yes">YES</option>
-                  <option value="no">NO</option>
-                </Form.Control>
-                {errors.area && (
-                  <div className={styles.errorsText}>
-                    Choose a valid location
-                  </div>
-                )}
-              </Form.Group>
-              <Form.Group>
-                <Form.Control
-                  as="select"
-                  defaultValue={null}
-                  size="lg"
-                  name="regLocation"
-                  ref={register({ required: true })}
-                >
-                  <option>
-                    My Truck/s is plated in Ontario, Mexico or USA?
-                  </option>
-                  <option value="yes">YES</option>
-                  <option value="no">NO</option>
-                </Form.Control>
-                {errors.regLocation && (
-                  <div className={styles.errorsText}>
-                    Place of registration is required
                   </div>
                 )}
               </Form.Group>
@@ -240,22 +210,84 @@ const step1 = () => {
                 )}
               </Form.Group>
               <Form.Group>
+                <Form.Label className="mute">MC Number </Form.Label>
+                <span> (If you travel interstate within the US)</span>
+                <Form.Control
+                  size="lg"
+                  type="text"
+                  placeholder="MC Number"
+                  name="mcnumber"
+                  ref={register({ required: false })}
+                />
+                {errors.mcnumber && (
+                  <div className={styles.errorsText}>
+                    {errors.mcnumber.message}
+                  </div>
+                )}
+              </Form.Group>
+              <Form.Group>
+                <Form.Control
+                  size="lg"
+                  type="text"
+                  placeholder="CBSA Number"
+                  name="cbsa"
+                  ref={register({ required: "CBSA number is required" })}
+                />
+                {errors.cbsa && (
+                  <div className={styles.errorsText}>{errors.cbsa.message}</div>
+                )}
+              </Form.Group>
+              <Form.Group>
                 <Form.Control
                   as="select"
-                  defaultValue="email"
+                  defaultValue="Are you Registered for Sales Tax?"
                   size="lg"
-                  name="medium"
+                  name="tax"
+                  ref={register({ required: "Tax status is required" })}
+                >
+                  <option>Are you Registered for Sales Tax?</option>
+                  <option value="yes">Yes</option>
+                  <option value="No">No</option>
+                </Form.Control>
+                {errors.tax && (
+                  <div className={styles.errorsText}>{errors.tax.message}</div>
+                )}
+              </Form.Group>
+
+              <Form.Group>
+                <Form.Control
+                  as="select"
+                  defaultValue={null}
+                  size="lg"
+                  name="taxreg"
                   ref={register({ required: true })}
                 >
-                  <option>
-                    Where can we send your login Security Code too?*
+                  <option>What sales tax are you registered for?</option>
+                  <option value="">Alberta GST</option>
+                  <option value="British Columbia PST">
+                    British Columbia PST
                   </option>
-                  <option value="Mobile Number">Mobile Number</option>
-                  <option value="email">Work Email Address</option>
+                  <option value="Manitoba PST">Manitoba PST</option>
+                  <option value="New Brunswick HST">New Brunswick HST</option>
+                  <option value="Newfoundland & Labrador HST">
+                    Newfoundland & Labrador HST
+                  </option>
+                  <option value="Northwest Territories GST">
+                    Northwest Territories GST
+                  </option>
+                  <option value="Nova Scotia HST">Nova Scotia HST</option>
+                  <option value="Nunavut  GST">Nunavut GST</option>
+                  <option value="Ontario HSR">Ontario HSR</option>
+                  <option value="Prince Edward Island HST">
+                    Prince Edward Island HST
+                  </option>
+                  <option value="Quebec QST">Quebec QST</option>
+                  <option value="Saskatchewan PST">Saskatchewan PST</option>
+                  <option value="Yukon GST">Yukon GST</option>
                 </Form.Control>
-                {errors.medium && (
+                {errors.taxreg && (
                   <div className={styles.errorsText}>
-                    Make a valid selection
+                    Make a valid Selection
                   </div>
                 )}
               </Form.Group>
@@ -266,7 +298,7 @@ const step1 = () => {
                 type="submit"
                 size="lg"
               >
-                Submit
+                Next
               </Button>
             </Form>
           </Col>
@@ -276,4 +308,4 @@ const step1 = () => {
   );
 };
 
-export default step1;
+export default CompanyProfile;

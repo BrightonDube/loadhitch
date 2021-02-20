@@ -17,7 +17,7 @@ const HeaderText = () => {
           />
         </Col>
         <Col className={styles.btn_col}>
-          <Button title="Carrier" href="/dashboard" />
+          <Button title="Carrier" href="/carrier_profile_form" />
         </Col>
       </Row>
     </div>

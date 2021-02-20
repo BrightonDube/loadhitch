@@ -1,191 +1,222 @@
-import { useRef } from "react";
+import { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Container, Row, Col, Form, Button, InputGroup } from "react-bootstrap";
 import styles from "../styles/Register.module.css";
+import VehicleType from "./VehicleType";
 
-const step2 = () => {
-  const { register, handleSubmit, errors, watch, reset } = useForm();
-  const onSubmit = (data, e) => {
-    e.target.reset();
+const LoadProfile = () => {
+  const { register, handleSubmit, errors, watch } = useForm();
+  const onSubmit = (data) => {
     console.log(data);
   };
-  const password = useRef({});
-  password.current = watch("password", "");
+  const [vehicleCount, setVehicleCount] = useState(0);
+  const vehicles = useRef({});
+  vehicles.current = watch("vehiclecount", "");
+  const handleClick = () => {
+    setVehicleCount(vehicles.current);
+  };
+  let n = vehicles.current;
+
   return (
     <div className={styles.formStyle}>
       <Container>
-        <Row>
-          <Col className="text-center pt-5">
-            <h1>Register</h1>
-          </Col>
-        </Row>
         <Row className="justify-content-center w-100 py-5">
           <Col xs={12} sm={10} md={8}>
             <Form className="w-90 mx-auto" onSubmit={handleSubmit(onSubmit)}>
               <Form.Group>
-                <Form.Control
-                  size="lg"
-                  type="text"
-                  placeholder="First Name"
-                  name="Name"
-                  ref={register({
-                    required: "Name required",
-                    maxLength: {
-                      value: 30,
-                      message: "character limit reached",
-                    },
-                  })}
-                />
-                {errors.Name && (
-                  <div className={styles.errorsText}>{errors.Name.message}</div>
-                )}
-              </Form.Group>
-              <Form.Group>
-                <Form.Control
-                  size="lg"
-                  type="text"
-                  placeholder="Last Name"
-                  name="LName"
-                  ref={register({
-                    required: "Last name is required",
-                    maxLength: {
-                      value: 20,
-                      message: "character limit reached",
-                    },
-                  })}
-                />
-                {errors.LName && (
+                <InputGroup>
+                  <Form.Control
+                    as="select"
+                    defaultValue={null}
+                    size="lg"
+                    name="vehiclecount"
+                    ref={register({
+                      required: "Number of vehicles is required",
+                    })}
+                  >
+                    <option>Select your number of Transport Vehicles*</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                  </Form.Control>
+
+                  <InputGroup.Append>
+                    <Button variant="outline-success" onClick={handleClick}>
+                      Confirm
+                    </Button>
+                  </InputGroup.Append>
+                </InputGroup>
+                {errors.vehiclecount && (
                   <div className={styles.errorsText}>
-                    {errors.LName.message}
+                    {errors.vehiclecount.message}
                   </div>
                 )}
               </Form.Group>
+              {[...Array(vehicleCount)].map((el, index) => (
+                <VehicleType key={index} index={index} />
+              ))}
+
               <Form.Group>
-                <Form.Control
-                  size="lg"
-                  type="text"
-                  placeholder="Company Name"
-                  name="companyName"
-                  ref={register({ required: false, maxLength: 40 })}
-                />
-                {errors.name && errors.name.type === "maxLength" && (
-                  <span>Max length exceeded</span>
-                )}
-              </Form.Group>
-              <Form.Group>
-                <Form.Control
-                  size="lg"
-                  type="email"
-                  placeholder="Work Email"
-                  name="email"
-                  ref={register({
-                    required: "valid email is required",
-                    pattern: {
-                      // Validation pattern
-                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                      message: "invalid email address", // Error message when validation fails.
-                    },
-                  })}
-                />
-                {errors.email && (
-                  <div className={styles.errorsText}>
-                    {errors.email.message}
-                  </div>
-                )}
-              </Form.Group>
-              <Form.Group>
-                <Form.Control
-                  size="lg"
-                  type="tel"
-                  placeholder="Mobile Number"
-                  name="mobileNumber"
-                  ref={register({
-                    required: "Your mobile number is required",
-                    maxLength: {
-                      value: 30,
-                      message: "character limit reached",
-                    },
-                  })}
-                />
-                {errors.mobileNumber && (
-                  <div className={styles.errorsText}>
-                    {errors.mobileNumber.message}
-                  </div>
-                )}
-              </Form.Group>
-              <Form.Group>
+                <Form.Label>Choose your preferred haul type</Form.Label>
                 <Form.Control
                   as="select"
                   defaultValue={null}
                   size="lg"
-                  name="role"
-                  ref={register({ required: "Role is required" })}
-                >
-                  <option>Your role can be best described as</option>
-                  <option value="owner operator">Owner Operator</option>
-                  <option value="company owner">Company Owner</option>
-                  <option value="dispatcher">Dispatcher</option>
-                  <option value="operations manager">Operations Manager</option>
-                  <option value="other">Other</option>
-                </Form.Control>
-                {errors.role && (
-                  <div className={styles.errorsText}>{errors.role.message}</div>
-                )}
-              </Form.Group>
-              <Form.Group>
-                <Form.Control
-                  as="select"
-                  defaultValue={null}
-                  size="lg"
-                  name="operation"
+                  name="haultype"
                   ref={register({ required: true })}
                 >
-                  <option>My Carrier operations is best described as</option>
-                  <option value="within">Within Canadian Border</option>
-                  <option value="across">Across Canadian Border</option>
-                  <option value="within and across">
-                    Within and across the Canadian border
+                  <option>Choose...</option>
+                  <option value="Full Truck Load">Full Truck Load (FTL)</option>
+                  <option value="Less than a Truck Load">
+                    Less than a Truck Load(LTL)
                   </option>
+                  <option value="FTL and LTL">FTL and LTL</option>
                 </Form.Control>
-                {errors.operation && (
-                  <div className={styles.errorsText}>
-                    Make a valid Selection
-                  </div>
-                )}
-              </Form.Group>
-              <Form.Group>
-                <Form.Control
-                  as="select"
-                  defaultValue={null}
-                  size="lg"
-                  name="destination"
-                  ref={register({ required: true })}
-                >
-                  <option>Please Specify Destination</option>
-                  <option value="Mexico">Mexico</option>
-                  <option value="USA">USA</option>
-                  <option value="both">Mexico and USA</option>
-                </Form.Control>
-                {errors.destination && (
+                {errors.haultype && (
                   <div className={styles.errorsText}>
                     Make a valid selection
                   </div>
                 )}
               </Form.Group>
-              <Form.Group>
-                <Form.Control
-                  size="lg"
-                  type="text"
-                  placeholder="DOT Number"
-                  name="dot"
-                  ref={register({ required: true })}
-                />
-                {errors.dot && (
-                  <div className={styles.errorsText}>
-                    DOT Number is required
-                  </div>
-                )}
-              </Form.Group>
+              <Form.Row>
+                <Form.Group as={Col} controlId="formGridLine">
+                  <Form.Label>Select your preferred Line</Form.Label>
+                  <Form.Control
+                    as="select"
+                    defaultValue="Canada"
+                    size="lg"
+                    name="line"
+                    ref={register({ required: true })}
+                  >
+                    <option>From</option>
+                    <option value="Canada">Canada</option>
+                    <option value="USA">USA</option>
+                    <option value="Mexico">Mexico</option>
+                  </Form.Control>
+                  {errors.line && (
+                    <div className={styles.errorsText}>
+                      This section is required
+                    </div>
+                  )}
+                </Form.Group>
+                <Form.Group as={Col} controlId="formGridLine">
+                  <Form.Label>To</Form.Label>
+                  <Form.Control
+                    as="select"
+                    defaultValue="To"
+                    size="lg"
+                    name="lineto"
+                    ref={register({ required: true })}
+                  >
+                    <option>To</option>
+                    <option value="Canada">Canada</option>
+                    <option value="USA">USA</option>
+                    <option value="Mexico">Mexico</option>
+                  </Form.Control>
+                  {errors.lineto && (
+                    <div className={styles.errorsText}>
+                      This section is required
+                    </div>
+                  )}
+                </Form.Group>
+                <Form.Group controlId="formHorizontalCheck">
+                  <Form.Label></Form.Label>
+                  <Form.Check
+                    className="mt-3"
+                    label="Select for return journey"
+                    name="return"
+                    ref={register({ required: false })}
+                  />
+                </Form.Group>
+              </Form.Row>
+              <Form.Row>
+                {/*  Province */}
+                <Form.Group as={Col} controlId="formGridProvince">
+                  <Form.Control
+                    as="select"
+                    defaultValue="FROM: Province/State"
+                    size="lg"
+                    name="province"
+                    ref={register({ required: true })}
+                  >
+                    <option>FROM: Province/State</option>
+                    <option value="Canada">Canada</option>
+                    <option value="USA">USA</option>
+                    <option value="Mexico">Mexico</option>
+                  </Form.Control>
+                  {errors.province && (
+                    <div className={styles.errorsText}>
+                      This section is required
+                    </div>
+                  )}
+                </Form.Group>
+                <Form.Group as={Col} controlId="formGridProvince">
+                  <Form.Control
+                    as="select"
+                    defaultValue="TO: Province/State"
+                    size="lg"
+                    name="provinceto"
+                    ref={register({ required: true })}
+                  >
+                    <option>From Province/State</option>
+                    <option value="Canada">Canada</option>
+                    <option value="USA">USA</option>
+                    <option value="Mexico">Mexico</option>
+                  </Form.Control>
+                  {errors.provinceto && (
+                    <div className={styles.errorsText}>
+                      This section is required
+                    </div>
+                  )}
+                </Form.Group>
+              </Form.Row>
+              <Form.Row>
+                <Form.Group as={Col} controlId="formGridCity">
+                  <Form.Control
+                    as="select"
+                    defaultValue="From City"
+                    size="lg"
+                    name="city"
+                    ref={register({ required: true })}
+                  >
+                    <option>From City</option>
+                    <option value="Canada">Canada</option>
+                    <option value="USA">USA</option>
+                    <option value="Mexico">Mexico</option>
+                  </Form.Control>
+                  {errors.city && (
+                    <div className={styles.errorsText}>
+                      This section is required
+                    </div>
+                  )}
+                </Form.Group>
+                <Form.Group as={Col} controlId="formGridCity">
+                  <Form.Control
+                    as="select"
+                    defaultValue="To City"
+                    size="lg"
+                    name="cityto"
+                    ref={register({ required: true })}
+                  >
+                    <option>To City</option>
+                    <option value="Canada">Canada</option>
+                    <option value="USA">USA</option>
+                    <option value="Mexico">Mexico</option>
+                  </Form.Control>
+                  {errors.cityto && (
+                    <div className={styles.errorsText}>
+                      This section is required
+                    </div>
+                  )}
+                </Form.Group>
+              </Form.Row>
               <Form.Group>
                 <Form.Control
                   as="select"
@@ -256,24 +287,9 @@ const step2 = () => {
                   </div>
                 )}
               </Form.Group>
+
               <Button
-                className={`mr-3 ${styles.submitButton}`}
-                variant="success"
-                type="submit"
-                size="lg"
-              >
-                Back
-              </Button>
-              <Button
-                className={`ml-auto ${styles.submitButton}`}
-                variant="success"
-                type="submit"
-                size="lg"
-              >
-                Submit
-              </Button>
-              <Button
-                className={`ml-3 ${styles.submitButton}`}
+                className={`${styles.submitButton}`}
                 variant="success"
                 type="submit"
                 size="lg"
@@ -288,4 +304,4 @@ const step2 = () => {
   );
 };
 
-export default step2;
+export default LoadProfile;

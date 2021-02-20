@@ -7,13 +7,11 @@ const FormLayout = ({ children }) => {
       <Container>
         <Row>
           <Col className="text-center pt-5">
-            <h1>Register</h1>
+            <h1>Carrier Profile Setup</h1>
           </Col>
         </Row>
         <Row className="justify-content-center w-100 py-5">
-          <Col xs={12} sm={10} md={8}>
-            {children}
-          </Col>
+          <Col>{children}</Col>
         </Row>
       </Container>
     </div>
