@@ -7,8 +7,6 @@ const VehicleType = (index) => {
     <Row className="justify-content-center w-100 py-5">
       <Form.Label>Select your vehicle type</Form.Label>
       <Form.Row>
-        <p>Vehicle </p>
-
         <Form.Group as={Col} controlId="formGridType">
           <Form.Control
             as="select"
