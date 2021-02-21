@@ -1,11 +1,30 @@
 import { useForm } from "react-hook-form";
 import { Row, Col, Form, Button } from "react-bootstrap";
+import { taxOptions, provincesOptions } from "../data/data";
+import Link from "next/link";
 import styles from "../styles/Register.module.css";
+import Select from "react-select";
 
 const CompanyProfile = () => {
   const { register, handleSubmit, errors } = useForm();
   const onSubmit = (data) => {
     console.log(data);
+  };
+
+  const customStyles = {
+    option: (provided, state) => ({
+      ...provided,
+      border: "1px solid #70ad47;",
+      backgroundColor: "#000",
+      color: state.isSelected ? "black" : "blue",
+      padding: 20,
+    }),
+    control: (styles) => ({
+      ...styles,
+      backgroundColor: "#000",
+      borderColor: "red",
+      borderStyle: "solid",
+    }),
   };
   return (
     <div className={styles.formStyle}>
@@ -21,7 +40,10 @@ const CompanyProfile = () => {
                 name="companyName"
                 ref={register({
                   required: "Company name required",
-                  maxLength: 40,
+                  maxLength: {
+                    value: 40,
+                    message: "Character limit reached",
+                  },
                 })}
               />
               {errors.companyName && (
@@ -30,6 +52,7 @@ const CompanyProfile = () => {
                 </div>
               )}
             </Form.Group>
+
             <Form.Group controlId="formGridAddress1">
               <Form.Label className="mt-3">Company Address</Form.Label>
               <Form.Control
@@ -56,7 +79,6 @@ const CompanyProfile = () => {
                 })}
               />
             </Form.Group>
-
             <Form.Group controlId="formGridCity">
               <Form.Control
                 size="lg"
@@ -72,20 +94,22 @@ const CompanyProfile = () => {
                 })}
               />
             </Form.Group>
-
             <Form.Group controlId="formGridState">
               <Form.Control
                 as="select"
                 defaultValue="Province..."
                 size="lg"
-                name="role"
+                name="province"
                 ref={register({ required: "Province is required" })}
               >
-                <option>Province...</option>
-                <option>Saskachewan</option>
+                <option value={null}>Province</option>
+                {provincesOptions.map((option, index) => (
+                  <option key={index} value={option.label}>
+                    {option.value}
+                  </option>
+                ))}
               </Form.Control>
             </Form.Group>
-
             <Form.Group controlId="formGridZip">
               <Form.Control
                 size="lg"
@@ -135,7 +159,6 @@ const CompanyProfile = () => {
                 <div className={styles.errorsText}>{errors.Name.message}</div>
               )}
             </Form.Group>
-
             <Form.Group>
               <Form.Control
                 size="lg"
@@ -155,7 +178,6 @@ const CompanyProfile = () => {
                 <div className={styles.errorsText}>{errors.email.message}</div>
               )}
             </Form.Group>
-
             <Form.Group>
               <Form.Control
                 size="lg"
@@ -180,7 +202,6 @@ const CompanyProfile = () => {
                 </div>
               )}
             </Form.Group>
-
             <Form.Group>
               <Form.Label className="mt-3">Company Information</Form.Label>
               <Form.Control
@@ -250,7 +271,6 @@ const CompanyProfile = () => {
                 <div className={styles.errorsText}>{errors.tax.message}</div>
               )}
             </Form.Group>
-
             <Form.Group>
               <Form.Control
                 as="select"
@@ -259,42 +279,35 @@ const CompanyProfile = () => {
                 name="taxreg"
                 ref={register({ required: true })}
               >
-                <option>What sales tax are you registered for?</option>
-                <option value="">Alberta GST</option>
-                <option value="British Columbia PST">
-                  British Columbia PST
-                </option>
-                <option value="Manitoba PST">Manitoba PST</option>
-                <option value="New Brunswick HST">New Brunswick HST</option>
-                <option value="Newfoundland & Labrador HST">
-                  Newfoundland & Labrador HST
-                </option>
-                <option value="Northwest Territories GST">
-                  Northwest Territories GST
-                </option>
-                <option value="Nova Scotia HST">Nova Scotia HST</option>
-                <option value="Nunavut  GST">Nunavut GST</option>
-                <option value="Ontario HSR">Ontario HSR</option>
-                <option value="Prince Edward Island HST">
-                  Prince Edward Island HST
-                </option>
-                <option value="Quebec QST">Quebec QST</option>
-                <option value="Saskatchewan PST">Saskatchewan PST</option>
-                <option value="Yukon GST">Yukon GST</option>
+                {taxOptions.map((option, index) => (
+                  <option key={index} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
               </Form.Control>
               {errors.taxreg && (
                 <div className={styles.errorsText}>Make a valid Selection</div>
               )}
             </Form.Group>
+            <Form.Group>
+              <Select
+                className={styles.selectStyle}
+                isMulti
+                styles={customStyles.option}
+                options={taxOptions}
+              />
+            </Form.Group>
 
-            <Button
-              className={`mx-auto ${styles.submitButton}`}
-              variant="success"
-              type="submit"
-              size="lg"
-            >
-              Next
-            </Button>
+            <Link passRef href="/step2">
+              <Button
+                className={`${styles.submitButton}`}
+                variant="success"
+                type="submit"
+                size="lg"
+              >
+                Next
+              </Button>
+            </Link>
           </Form>
         </Col>
       </Row>

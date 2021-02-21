@@ -1,6 +1,4 @@
 import CompanyProfile from "../components/CompanyProfile";
-import LoadProfile from "../components/LoadProfile";
-import FinancialInfo from "../components/FinancialInfo";
 import FormLayout from "../components/FormLayout";
 import FormNav from "../components/FormNav";
 
@@ -14,10 +12,7 @@ const carrier_profile_form = () => {
       <FormLayout>
         <StateMachineProvider>
           <FormNav />
-
           <CompanyProfile />
-          <LoadProfile />
-          <FinancialInfo />
         </StateMachineProvider>
       </FormLayout>
     </div>

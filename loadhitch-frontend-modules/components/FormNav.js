@@ -8,9 +8,11 @@ const FormNav = () => {
       <ul>
         <li>
           <Link
-            href="/step1"
+            href="/carrier_profile_form"
             passHref
-            className={router.pathname == "/step1" ? "active" : ""}
+            className={
+              router.pathname == "/carrier_profile_form" ? "active" : ""
+            }
           >
             <p>Company Profile</p>
           </Link>

@@ -1,3 +1,6 @@
+.selectStyle select:-webkit-autofill,
+.selectStyle select:-webkit-autofill:hover,
+.selectStyle select:-webkit-autofill:focus,
 .formStyle input:-webkit-autofill,
 .formStyle input:-webkit-autofill:hover,
 .formStyle input:-webkit-autofill:focus,
@@ -6,12 +9,14 @@
 .formStyle textarea:-webkit-autofill:focus,
 .formStyle select:-webkit-autofill,
 .formStyle select:-webkit-autofill:hover,
-.formStyle select:-webkit-autofill:focus {
+.formStyle select:-webkit-autofill:focus,
+.selectStyle {
   transition: background-color 10000s;
   -webkit-text-fill-color: #70ad47 !important;
 }
 
 .formStyle,
+.selectStyle,
 .formStyle select:focus,
 .formStyle input:focus,
 .formStyle input,
@@ -20,6 +25,11 @@
   background-color: #000;
   color: #70ad47;
   border-color: #70ad47;
+}
+.selectStyle {
+  background-color: #000 !important;
+  color: #70ad47 !important;
+  border-color: #70ad47 !important;
 }
 
 .formStyle ::placeholder {

@@ -1,279 +1,316 @@
-import { useRef } from "react";
 import { useForm } from "react-hook-form";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Row, Col, Form, Button } from "react-bootstrap";
+import { taxOptions, provincesOptions } from "../data/data";
 import styles from "../styles/Register.module.css";
+import Select from "react-select";
 
-const step1 = () => {
-  const { register, handleSubmit, errors, watch } = useForm();
-  const onSubmit = (data, e) => {
-    e.target.reset();
+const CompanyProfile = () => {
+  const { register, handleSubmit, errors } = useForm();
+  const onSubmit = (data) => {
     console.log(data);
   };
-  const password = useRef({});
-  password.current = watch("password", "");
+
+  const customStyles = {
+    option: (provided, state) => ({
+      ...provided,
+      border: "1px solid #70ad47;",
+      backgroundColor: "#000",
+      color: state.isSelected ? "black" : "blue",
+      padding: 20,
+    }),
+    control: (styles) => ({
+      ...styles,
+      backgroundColor: "#000",
+      borderColor: "red",
+      borderStyle: "solid",
+    }),
+  };
   return (
     <div className={styles.formStyle}>
-      <Container>
-        <Row>
-          <Col className="text-center pt-5">
-            <h1>Company Profile</h1>
-          </Col>
-        </Row>
-        <Row className="justify-content-center w-100 py-5">
-          <Col xs={12} sm={10} md={8}>
-            <Form className="w-90 mx-auto" onSubmit={handleSubmit(onSubmit)}>
-              <Form.Group>
-                <Form.Control
-                  size="lg"
-                  type="text"
-                  placeholder="First Name"
-                  name="Name"
-                  ref={register({
-                    required: "Name required",
-                    maxLength: {
-                      value: 30,
-                      message: "character limit reached",
-                    },
-                  })}
-                />
-                {errors.Name && (
-                  <div className={styles.errorsText}>{errors.Name.message}</div>
-                )}
-              </Form.Group>
-              <Form.Group>
-                <Form.Control
-                  size="lg"
-                  type="text"
-                  placeholder="Last Name"
-                  name="LName"
-                  ref={register({
-                    required: "Last name is required",
-                    maxLength: {
-                      value: 20,
-                      message: "character limit reached",
-                    },
-                  })}
-                />
-                {errors.LName && (
-                  <div className={styles.errorsText}>
-                    {errors.LName.message}
-                  </div>
-                )}
-              </Form.Group>
-
-              <Form.Group>
-                <Form.Control
-                  size="lg"
-                  type="text"
-                  placeholder="Company Name"
-                  name="companyName"
-                  ref={register({ required: false, maxLength: 40 })}
-                />
-                {errors.name && errors.name.type === "maxLength" && (
-                  <span>Max length exceeded</span>
-                )}
-              </Form.Group>
-              <Form.Group>
-                <Form.Control
-                  size="lg"
-                  type="email"
-                  placeholder="Work Email"
-                  name="email"
-                  ref={register({
-                    required: "valid email is required",
-                    pattern: {
-                      // Validation pattern
-                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                      message: "invalid email address", // Error message when validation fails.
-                    },
-                  })}
-                />
-                {errors.email && (
-                  <div className={styles.errorsText}>
-                    {errors.email.message}
-                  </div>
-                )}
-              </Form.Group>
-
-              <Form.Group>
-                <Form.Control
-                  size="lg"
-                  type="tel"
-                  placeholder="Mobile Number"
-                  name="mobileNumber"
-                  ref={register({
-                    required: "Your mobile number is required",
-                    maxLength: {
-                      value: 30,
-                      message: "character limit reached",
-                    },
-                  })}
-                />
-                {errors.mobileNumber && (
-                  <div className={styles.errorsText}>
-                    {errors.mobileNumber.message}
-                  </div>
-                )}
-              </Form.Group>
-              <Form.Group>
-                <Form.Control
-                  as="select"
-                  defaultValue={null}
-                  size="lg"
-                  name="role"
-                  ref={register({ required: "Role is required" })}
-                >
-                  <option>Your role can be best described as</option>
-                  <option value="owner operator">Owner Operator</option>
-                  <option value="company owner">Company Owner</option>
-                  <option value="dispatcher">Dispatcher</option>
-                  <option value="operations manager">Operations Manager</option>
-                  <option value="other">Other</option>
-                </Form.Control>
-                {errors.role && (
-                  <div className={styles.errorsText}>{errors.role.message}</div>
-                )}
-              </Form.Group>
-
-              <Form.Group>
-                <Form.Control
-                  as="select"
-                  defaultValue={null}
-                  size="lg"
-                  name="operation"
-                  ref={register({ required: true })}
-                >
-                  <option>My Carrier operations is best described as</option>
-                  <option value="within">Within Canadian Border</option>
-                  <option value="across">Across Canadian Border</option>
-                  <option value="within and across">
-                    Within and across the Canadian border
-                  </option>
-                </Form.Control>
-                {errors.operation && (
-                  <div className={styles.errorsText}>
-                    Make a valid Selection
-                  </div>
-                )}
-              </Form.Group>
-              <Form.Group>
-                <Form.Control
-                  as="select"
-                  defaultValue={null}
-                  size="lg"
-                  name="destination"
-                  ref={register({ required: true })}
-                >
-                  <option>Please Specify Destination</option>
-                  <option value="Mexico">Mexico</option>
-                  <option value="USA">USA</option>
-                  <option value="both">Mexico and USA</option>
-                </Form.Control>
-                {errors.destination && (
-                  <div className={styles.errorsText}>
-                    Make a valid selection
-                  </div>
-                )}
-              </Form.Group>
-              <Form.Group>
-                <Form.Control
-                  size="lg"
-                  type="text"
-                  placeholder="DOT Number"
-                  name="dot"
-                  ref={register({ required: true })}
-                />
-                {errors.dot && (
-                  <div className={styles.errorsText}>
-                    DOT Number is required
-                  </div>
-                )}
-              </Form.Group>
-              <Form.Group>
-                <Form.Control
-                  as="select"
-                  defaultValue={null}
-                  size="lg"
-                  name="area"
-                  ref={register({ required: true })}
-                >
-                  <option>I travel within Ontario</option>
-                  <option value="yes">YES</option>
-                  <option value="no">NO</option>
-                </Form.Control>
-                {errors.area && (
-                  <div className={styles.errorsText}>
-                    Choose a valid location
-                  </div>
-                )}
-              </Form.Group>
-              <Form.Group>
-                <Form.Control
-                  as="select"
-                  defaultValue={null}
-                  size="lg"
-                  name="regLocation"
-                  ref={register({ required: true })}
-                >
-                  <option>
-                    My Truck/s is plated in Ontario, Mexico or USA?
-                  </option>
-                  <option value="yes">YES</option>
-                  <option value="no">NO</option>
-                </Form.Control>
-                {errors.regLocation && (
-                  <div className={styles.errorsText}>
-                    Place of registration is required
-                  </div>
-                )}
-              </Form.Group>
-              <Form.Group>
-                <Form.Control
-                  size="lg"
-                  type="text"
-                  placeholder="CVOR Number"
-                  name="cvor"
-                  ref={register({ required: "CVOR number is required" })}
-                />
-                {errors.cvor && (
-                  <div className={styles.errorsText}>{errors.cvor.message}</div>
-                )}
-              </Form.Group>
-              <Form.Group>
-                <Form.Control
-                  as="select"
-                  defaultValue="email"
-                  size="lg"
-                  name="medium"
-                  ref={register({ required: true })}
-                >
-                  <option>
-                    Where can we send your login Security Code too?*
-                  </option>
-                  <option value="Mobile Number">Mobile Number</option>
-                  <option value="email">Work Email Address</option>
-                </Form.Control>
-                {errors.medium && (
-                  <div className={styles.errorsText}>
-                    Make a valid selection
-                  </div>
-                )}
-              </Form.Group>
-
-              <Button
-                className={`mx-auto ${styles.submitButton}`}
-                variant="success"
-                type="submit"
+      <Row className="justify-content-center w-100 py-5">
+        <Col xs={12} sm={10}>
+          <Form className="w-90 mx-auto" onSubmit={handleSubmit(onSubmit)}>
+            <Form.Group>
+              <Form.Label className="mt-3">Company Name</Form.Label>
+              <Form.Control
                 size="lg"
+                type="text"
+                placeholder="Company Name"
+                name="companyName"
+                ref={register({
+                  required: "Company name required",
+                  maxLength: {
+                    value: 40,
+                    message: "Character limit reached",
+                  },
+                })}
+              />
+              {errors.companyName && (
+                <div className={styles.errorsText}>
+                  {errors.companyName.message}
+                </div>
+              )}
+            </Form.Group>
+
+            <Form.Group controlId="formGridAddress1">
+              <Form.Label className="mt-3">Company Address</Form.Label>
+              <Form.Control
+                placeholder="Address Line 1"
+                size="lg"
+                type="text"
+                name="address1"
+                ref={register({
+                  required: "Address required",
+                })}
+              />
+            </Form.Group>
+            {errors.address1 && (
+              <div className={styles.errorsText}>{errors.address1.message}</div>
+            )}
+            <Form.Group controlId="formGridAddress2">
+              <Form.Control
+                placeholder="Address Line 2"
+                size="lg"
+                type="text"
+                name="address2"
+                ref={register({
+                  required: false,
+                })}
+              />
+            </Form.Group>
+            <Form.Group controlId="formGridCity">
+              <Form.Control
+                size="lg"
+                type="text"
+                placeholder="City"
+                name="city"
+                ref={register({
+                  required: "City required",
+                  maxLength: {
+                    value: 30,
+                    message: "character limit reached",
+                  },
+                })}
+              />
+            </Form.Group>
+            <Form.Group controlId="formGridState">
+              <Form.Control
+                as="select"
+                defaultValue="Province..."
+                size="lg"
+                name="province"
+                ref={register({ required: "Province is required" })}
               >
-                Submit
-              </Button>
-            </Form>
-          </Col>
-        </Row>
-      </Container>
+                <option value={null}>Province</option>
+                {provincesOptions.map((option, index) => (
+                  <option key={index} value={option.label}>
+                    {option.value}
+                  </option>
+                ))}
+              </Form.Control>
+            </Form.Group>
+            <Form.Group controlId="formGridZip">
+              <Form.Control
+                size="lg"
+                type="text"
+                placeholder="Zip Code"
+                name="zip"
+                ref={register({
+                  required: "Zip Code required",
+                  maxLength: {
+                    value: 30,
+                    message: "character limit reached",
+                  },
+                })}
+              />
+            </Form.Group>
+            {errors.zip && (
+              <div className={styles.errorsText}>{errors.zip.message}</div>
+            )}
+            <Form.Group controlId="formGridZip">
+              <Form.Control
+                size="lg"
+                type="text"
+                placeholder="Canada"
+                value="Canada"
+                name="country"
+                ref={register({
+                  required: true,
+                })}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label className="mt-3">Contact Person</Form.Label>
+              <Form.Control
+                size="lg"
+                type="text"
+                placeholder="Full Name"
+                name="Name"
+                ref={register({
+                  required: "Name required",
+                  maxLength: {
+                    value: 30,
+                    message: "character limit reached",
+                  },
+                })}
+              />
+              {errors.Name && (
+                <div className={styles.errorsText}>{errors.Name.message}</div>
+              )}
+            </Form.Group>
+            <Form.Group>
+              <Form.Control
+                size="lg"
+                type="email"
+                placeholder="Work Email"
+                name="email"
+                ref={register({
+                  required: "valid email is required",
+                  pattern: {
+                    // Validation pattern
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                    message: "invalid email address", // Error message when validation fails.
+                  },
+                })}
+              />
+              {errors.email && (
+                <div className={styles.errorsText}>{errors.email.message}</div>
+              )}
+            </Form.Group>
+            <Form.Group>
+              <Form.Control
+                size="lg"
+                type="tel"
+                placeholder="Mobile Number"
+                name="mobileNumber"
+                ref={register({
+                  required: "Your mobile number is required",
+                  minLength: {
+                    value: 6,
+                    message: "Must be at least 6 digits",
+                  },
+                  maxLength: {
+                    value: 30,
+                    message: "character limit reached",
+                  },
+                })}
+              />
+              {errors.mobileNumber && (
+                <div className={styles.errorsText}>
+                  {errors.mobileNumber.message}
+                </div>
+              )}
+            </Form.Group>
+            <Form.Group>
+              <Form.Label className="mt-3">Company Information</Form.Label>
+              <Form.Control
+                size="lg"
+                type="text"
+                placeholder="DOT Number"
+                name="dot"
+                ref={register({ required: true })}
+              />
+              {errors.dot && (
+                <div className={styles.errorsText}>DOT Number is required</div>
+              )}
+            </Form.Group>
+            <Form.Group>
+              <Form.Control
+                size="lg"
+                type="text"
+                placeholder="CVOR Number"
+                name="cvor"
+                ref={register({ required: "CVOR number is required" })}
+              />
+              {errors.cvor && (
+                <div className={styles.errorsText}>{errors.cvor.message}</div>
+              )}
+            </Form.Group>
+            <Form.Group>
+              <Form.Label className="mute">MC Number </Form.Label>
+              <span> (If you travel interstate within the US)</span>
+              <Form.Control
+                size="lg"
+                type="text"
+                placeholder="MC Number"
+                name="mcnumber"
+                ref={register({ required: false })}
+              />
+              {errors.mcnumber && (
+                <div className={styles.errorsText}>
+                  {errors.mcnumber.message}
+                </div>
+              )}
+            </Form.Group>
+            <Form.Group>
+              <Form.Control
+                size="lg"
+                type="text"
+                placeholder="CBSA Number"
+                name="cbsa"
+                ref={register({ required: "CBSA number is required" })}
+              />
+              {errors.cbsa && (
+                <div className={styles.errorsText}>{errors.cbsa.message}</div>
+              )}
+            </Form.Group>
+            <Form.Group>
+              <Form.Control
+                as="select"
+                defaultValue="Are you Registered for Sales Tax?"
+                size="lg"
+                name="tax"
+                ref={register({ required: "Tax status is required" })}
+              >
+                <option>Are you Registered for Sales Tax?</option>
+                <option value="yes">Yes</option>
+                <option value="No">No</option>
+              </Form.Control>
+              {errors.tax && (
+                <div className={styles.errorsText}>{errors.tax.message}</div>
+              )}
+            </Form.Group>
+            <Form.Group>
+              <Form.Control
+                as="select"
+                defaultValue={null}
+                size="lg"
+                name="taxreg"
+                ref={register({ required: true })}
+              >
+                {taxOptions.map((option, index) => (
+                  <option key={index} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </Form.Control>
+              {errors.taxreg && (
+                <div className={styles.errorsText}>Make a valid Selection</div>
+              )}
+            </Form.Group>
+            <Form.Group>
+              <Select
+                className={styles.selectStyle}
+                isMulti
+                styles={customStyles.option}
+                options={taxOptions}
+              />
+            </Form.Group>
+
+            <Button
+              className={`mx-auto ${styles.submitButton}`}
+              variant="success"
+              type="submit"
+              size="lg"
+            >
+              {" "}
+              Next
+            </Button>
+          </Form>
+        </Col>
+      </Row>
     </div>
   );
 };
 
-export default step1;
+export default CompanyProfile;

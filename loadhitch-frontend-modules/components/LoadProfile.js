@@ -1,10 +1,17 @@
 import { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
-import { Container, Row, Col, Form, Button, InputGroup } from "react-bootstrap";
+import { Row, Col, Form, Button, InputGroup } from "react-bootstrap";
 import styles from "../styles/Register.module.css";
 import VehicleType from "./VehicleType";
 import FormLayout from "./FormLayout";
 import FormNav from "./FormNav";
+import {
+  stateOptions,
+  provincesOptions,
+  uscitiesOptions,
+  cityOptions,
+} from "../data/data";
+import Link from "next/link";
 
 const LoadProfile = () => {
   const { register, handleSubmit, errors, watch } = useForm();
@@ -150,9 +157,16 @@ const LoadProfile = () => {
                   ref={register({ required: true })}
                 >
                   <option>FROM: Province/State</option>
-                  <option value="Canada">Canada</option>
-                  <option value="USA">USA</option>
-                  <option value="Mexico">Mexico</option>
+                  {provincesOptions.map((option, index) => (
+                    <option key={index} value={option.label}>
+                      {option.value}
+                    </option>
+                  ))}
+                  {stateOptions.map((option, index) => (
+                    <option key={index} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
                 </Form.Control>
                 {errors.province && (
                   <div className={styles.errorsText}>
@@ -168,10 +182,17 @@ const LoadProfile = () => {
                   name="provinceto"
                   ref={register({ required: true })}
                 >
-                  <option>From Province/State</option>
-                  <option value="Canada">Canada</option>
-                  <option value="USA">USA</option>
-                  <option value="Mexico">Mexico</option>
+                  <option>To Province/State</option>
+                  {provincesOptions.map((option, index) => (
+                    <option key={index} value={option.label}>
+                      {option.value}
+                    </option>
+                  ))}
+                  {stateOptions.map((option, index) => (
+                    <option key={index} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
                 </Form.Control>
                 {errors.provinceto && (
                   <div className={styles.errorsText}>
@@ -190,9 +211,16 @@ const LoadProfile = () => {
                   ref={register({ required: true })}
                 >
                   <option>From City</option>
-                  <option value="Canada">Canada</option>
-                  <option value="USA">USA</option>
-                  <option value="Mexico">Mexico</option>
+                  {uscitiesOptions.map((option, index) => (
+                    <option key={index} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                  {cityOptions.map((option, index) => (
+                    <option key={index} value={option}>
+                      {option}
+                    </option>
+                  ))}
                 </Form.Control>
                 {errors.city && (
                   <div className={styles.errorsText}>
@@ -209,9 +237,16 @@ const LoadProfile = () => {
                   ref={register({ required: true })}
                 >
                   <option>To City</option>
-                  <option value="Canada">Canada</option>
-                  <option value="USA">USA</option>
-                  <option value="Mexico">Mexico</option>
+                  {uscitiesOptions.map((option, index) => (
+                    <option key={index} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                  {cityOptions.map((option, index) => (
+                    <option key={index} value={option}>
+                      {option}
+                    </option>
+                  ))}
                 </Form.Control>
                 {errors.cityto && (
                   <div className={styles.errorsText}>
@@ -220,14 +255,16 @@ const LoadProfile = () => {
                 )}
               </Form.Group>
             </Form.Row>
-            <Button
-              className={`${styles.submitButton}`}
-              variant="success"
-              type="submit"
-              size="lg"
-            >
-              Next
-            </Button>
+            <Link href="/step2">
+              <Button
+                className={`${styles.submitButton}`}
+                variant="success"
+                type="submit"
+                size="lg"
+              >
+                Next
+              </Button>
+            </Link>
           </Form>
         </Col>
       </Row>
