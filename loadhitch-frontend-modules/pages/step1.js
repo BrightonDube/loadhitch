@@ -12,7 +12,6 @@ const CompanyProfile = () => {
 
   const customStyles = {
     option: (provided, state) => ({
-      ...provided,
       border: "1px solid #70ad47;",
       backgroundColor: "#000",
       color: state.isSelected ? "black" : "blue",

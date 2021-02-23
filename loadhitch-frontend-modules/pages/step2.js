@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
+import Link from "next/link";
 import { Row, Col, Form, Button, InputGroup } from "react-bootstrap";
 import styles from "../styles/Register.module.css";
 import VehicleType from "../components/VehicleType";
@@ -254,15 +255,16 @@ const LoadProfile = () => {
                 )}
               </Form.Group>
             </Form.Row>
-            <Button
-              className={`${styles.submitButton}`}
-              variant="success"
-              type="submit"
-              size="lg"
-              href="/step3"
-            >
-              Next
-            </Button>
+            <Link href="/step3">
+              <Button
+                className={`${styles.submitButton}`}
+                variant="success"
+                type="submit"
+                size="lg"
+              >
+                Next
+              </Button>
+            </Link>
           </Form>
         </Col>
       </Row>

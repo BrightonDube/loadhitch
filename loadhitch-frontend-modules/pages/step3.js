@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Row, Col, Form, Button } from "react-bootstrap";
 import FormLayout from "../components/FormLayout";
 import FormNav from "../components/FormNav";
 import { useHistory } from "react-router-dom";
@@ -17,7 +17,6 @@ const FinancialInfo = () => {
   return (
     <FormLayout>
       <FormNav />
-
       <Row className="justify-content-center w-100 py-5">
         <Col xs={12} sm={10}>
           <Form className="w-90 mx-auto" onSubmit={handleSubmit(onSubmit)}>
@@ -75,7 +74,6 @@ const FinancialInfo = () => {
                   <span>Max length exceeded</span>
                 )}
             </Form.Group>
-
             <Button
               className={`mx-auto ${styles.submitButton}`}
               variant="success"

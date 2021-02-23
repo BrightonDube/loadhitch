@@ -1,12 +1,17 @@
 import CompanyProfile from "../components/CompanyProfile";
 import FormLayout from "../components/FormLayout";
 import FormNav from "../components/FormNav";
-
-import { useHistory } from "react-router-dom";
 import { StateMachineProvider, createStore } from "little-state-machine";
 
+createStore({
+  yourDetails: {
+    firstName: "",
+    lastName: "",
+    age: "",
+    yearsOfExp: "",
+  },
+});
 const carrier_profile_form = () => {
-  const history = useHistory();
   return (
     <div>
       <FormLayout>

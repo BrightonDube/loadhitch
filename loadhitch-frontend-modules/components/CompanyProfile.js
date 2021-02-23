@@ -4,26 +4,74 @@ import { taxOptions, provincesOptions } from "../data/data";
 import Link from "next/link";
 import styles from "../styles/Register.module.css";
 import Select from "react-select";
+import { useHistory } from "react-router-dom";
+import { useStateMachine } from "little-state-machine";
+import updateAction from "./updateAction";
 
 const CompanyProfile = () => {
   const { register, handleSubmit, errors } = useForm();
-  const onSubmit = (data) => {
+  const { state, action } = useStateMachine(updateAction);
+
+  const onSubmit = (data, e) => {
+    e.preventDefault();
+
     console.log(data);
   };
 
   const customStyles = {
     option: (provided, state) => ({
       ...provided,
-      border: "1px solid #70ad47;",
+      border: "1px solid #70ad47",
       backgroundColor: "#000",
-      color: state.isSelected ? "black" : "blue",
-      padding: 20,
+      color: state.isSelected ? "#000" : "#000",
+      backgroundColor: state.isSelected ? "#000" : "#000",
+      padding: 10,
+    }),
+    container: (base) => ({
+      ...base,
+      backgroundColor: "#000",
     }),
     control: (styles) => ({
       ...styles,
       backgroundColor: "#000",
-      borderColor: "red",
+      borderColor: "#70ad47",
       borderStyle: "solid",
+    }),
+    control: (base) => ({
+      ...base,
+      height: 50,
+      minHeight: 50,
+      borderColor: "#70ad47",
+      backgroundColor: "#000",
+      borderRadius: 5,
+      fontSize: 18,
+    }),
+    indicatorsContainer: (base) => ({
+      ...base,
+      borderColor: "#70ad47",
+      backgroundColor: "#000",
+    }),
+    indicatorSeparator: (base) => ({
+      ...base,
+      display: "none",
+    }),
+    dropdownIndicator: (base) => ({
+      ...base,
+      color: "#70ad47",
+    }),
+    valueContainer: (base) => ({
+      ...base,
+      padding: 0,
+      paddingLeft: 20,
+    }),
+    multiValue: (base) => ({
+      ...base,
+      color: "#70ad47",
+      backgroundColor: "#000",
+    }),
+    clearIndicator: (base) => ({
+      ...base,
+      color: "#70ad47",
     }),
   };
   return (
@@ -271,31 +319,21 @@ const CompanyProfile = () => {
                 <div className={styles.errorsText}>{errors.tax.message}</div>
               )}
             </Form.Group>
-            <Form.Group>
-              <Form.Control
-                as="select"
-                defaultValue={null}
-                size="lg"
-                name="taxreg"
-                ref={register({ required: true })}
-              >
-                {taxOptions.map((option, index) => (
-                  <option key={index} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </Form.Control>
-              {errors.taxreg && (
-                <div className={styles.errorsText}>Make a valid Selection</div>
-              )}
-            </Form.Group>
+
             <Form.Group>
               <Select
                 className={styles.selectStyle}
+                classNamePrefix={styles.selectStyle}
                 isMulti
-                styles={customStyles.option}
+                styles={customStyles}
                 options={taxOptions}
+                placeholder={"What sales tax are you registered for?"}
+                name="taxreg"
+                ref={register({ required: true })}
               />
+              {errors.taxreg && (
+                <div className={styles.errorsText}>Make a valid Selection</div>
+              )}
             </Form.Group>
 
             <Link passRef href="/step2">
