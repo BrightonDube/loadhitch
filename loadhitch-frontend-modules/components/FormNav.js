@@ -1,40 +1,46 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import styles from "../styles/FormNav.module.css";
 
 const FormNav = () => {
   const router = useRouter();
   return (
-    <div>
+    <div className={styles.container}>
       <ul>
-        <li>
-          <Link
-            href="/carrier_profile_form"
-            passHref
-            className={
-              router.pathname == "/carrier_profile_form" ? "active" : ""
-            }
-          >
-            <p>Company Profile</p>
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="/step2"
-            passHref
-            className={router.pathname == "/step2" ? "active" : ""}
-          >
-            <p>Load Profile</p>
-          </Link>
-        </li>
-        <li>
-          <Link
-            href="/step3"
-            passHref
-            className={router.pathname == "/step3" ? "active" : ""}
-          >
-            <p>Financial Information</p>
-          </Link>
-        </li>
+        <Link
+          href="/carrier_profile_form"
+          passHref
+          className={
+            router.pathname == "/carrier_profile_form" ? `{styles.active}` : ""
+          }
+        >
+          <div className={styles.innerContainer}>
+            <div className={styles.box}>1</div>
+            <li className={styles.menuList}>Company Profile</li>
+          </div>
+        </Link>
+
+        <Link
+          href="/step2"
+          passHref
+          className={router.pathname == "/step2" ? "active" : ""}
+        >
+          <div className={styles.innerContainer}>
+            <div className={styles.box}>2</div>
+            <li className={styles.menuList}>Load Profile</li>
+          </div>
+        </Link>
+
+        <Link
+          href="/step3"
+          passHref
+          className={router.pathname == "/step3" ? "active" : ""}
+        >
+          <div className={styles.innerContainer}>
+            <div className={styles.box}>3</div>
+            <li className={styles.menuList}>Financial Information</li>
+          </div>
+        </Link>
       </ul>
     </div>
   );

@@ -1,0 +1,28 @@
+.menuList {
+  list-style: none;
+  font-size: large;
+}
+.container {
+  display: flex;
+  justify-content: center;
+}
+.active {
+  color: red;
+}
+.box {
+  width: 30px;
+  height: 30;
+  background-color: #70ad47;
+  color: black;
+  justify-content: center;
+  align-items: center;
+  padding-left: 10px;
+  margin-right: 5px;
+}
+.innerContainer {
+  float: left;
+  margin-right: 4em;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+}
