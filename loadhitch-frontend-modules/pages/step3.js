@@ -17,18 +17,15 @@ const step3 = () => {
     actions.updateAction(data);
 
     try {
-      const res = await fetch(
-        "https://8u6y5jqfu7.execute-api.us-east-1.amazonaws.com/dev/v1/carrier",
-        {
-          body: JSON.stringify({
-            state,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-          },
-          method: "POST",
-        }
-      );
+      const res = await fetch("/api/carrierprofile", {
+        body: JSON.stringify({
+          state,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+      });
       const result = await res.json();
     } catch (err) {
       console.log(err);
