@@ -8,13 +8,31 @@ import updateAction from "../components/updateAction";
 
 import styles from "../styles/Register.module.css";
 
-const FinancialInfo = () => {
+const step3 = () => {
   const router = useRouter();
   const { register, handleSubmit, errors } = useForm();
   const { actions, state } = useStateMachine({ updateAction });
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     actions.updateAction(data);
+
+    try {
+      const res = await fetch(
+        "https://8u6y5jqfu7.execute-api.us-east-1.amazonaws.com/dev/v1/carrier",
+        {
+          body: JSON.stringify({
+            state,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+          method: "POST",
+        }
+      );
+      const result = await res.json();
+    } catch (err) {
+      console.log(err);
+    }
     router.push("./results");
   };
   return (
@@ -82,7 +100,6 @@ const FinancialInfo = () => {
               variant="success"
               type="submit"
               size="lg"
-              href="/dashboard"
             >
               Finish
             </Button>
@@ -93,4 +110,4 @@ const FinancialInfo = () => {
   );
 };
 
-export default FinancialInfo;
+export default step3;

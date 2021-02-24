@@ -18,15 +18,13 @@ import {
 const step2 = () => {
   const router = useRouter();
   const { register, handleSubmit, errors, watch } = useForm();
-  console.log(useStateMachine(updateAction));
-  const { actions, state } = useStateMachine(updateAction);
+  const { actions, state } = useStateMachine({ updateAction });
   const onSubmit = (data) => {
     actions.updateAction(data);
     router.push("./step3");
   };
-  const [vehicleCount, setVehicleCount] = useState(0);
+  const [vehicleCount, setVehicleCount] = useState(1);
   const vehicles = useRef({});
-
   vehicles.current = watch("vehiclecount", "");
   const handleClick = () => {
     setVehicleCount(vehicles.current);
@@ -74,17 +72,16 @@ const step2 = () => {
               )}
             </Form.Group>
 
-            {Array.from({ length: vehicleCount }, () => ({
+            {/* {Array.from({ length: vehicleCount }, () => ({
               hello: "goodbye",
             })).map((el, index) => (
               <VehicleType key={index} />
-            ))}
+            ))} */}
 
             <Form.Group>
               <Form.Label>Choose your preferred haul type</Form.Label>
               <Form.Control
                 as="select"
-                defaultValue={null}
                 size="lg"
                 name="haultype"
                 ref={register({ required: true })}
@@ -125,7 +122,6 @@ const step2 = () => {
                 <Form.Label>To</Form.Label>
                 <Form.Control
                   as="select"
-                  defaultValue="To"
                   size="lg"
                   name="lineto"
                   ref={register({ required: true })}
