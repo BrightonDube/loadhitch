@@ -1,19 +1,22 @@
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/router";
 import { Row, Col, Form, Button } from "react-bootstrap";
 import FormLayout from "../components/FormLayout";
 import FormNav from "../components/FormNav";
-import { useHistory } from "react-router-dom";
 import { useStateMachine } from "little-state-machine";
 import updateAction from "../components/updateAction";
 
 import styles from "../styles/Register.module.css";
 
 const FinancialInfo = () => {
+  const router = useRouter();
   const { register, handleSubmit, errors } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
-  };
+  const { actions, state } = useStateMachine({ updateAction });
 
+  const onSubmit = (data) => {
+    actions.updateAction(data);
+    router.push("./results");
+  };
   return (
     <FormLayout>
       <FormNav />

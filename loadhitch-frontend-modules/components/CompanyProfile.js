@@ -1,21 +1,20 @@
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/router";
 import { Row, Col, Form, Button } from "react-bootstrap";
 import { taxOptions, provincesOptions } from "../data/data";
-import Link from "next/link";
 import styles from "../styles/Register.module.css";
 import Select from "react-select";
-import { useHistory } from "react-router-dom";
 import { useStateMachine } from "little-state-machine";
 import updateAction from "./updateAction";
 
 const CompanyProfile = () => {
+  const router = useRouter();
   const { register, handleSubmit, errors } = useForm();
-  const { state, action } = useStateMachine(updateAction);
+  const { actions, state } = useStateMachine({ updateAction });
 
-  const onSubmit = (data, e) => {
-    e.preventDefault();
-
-    console.log(data);
+  const onSubmit = (data) => {
+    actions.updateAction(data);
+    router.push("./step2");
   };
 
   const customStyles = {
@@ -306,12 +305,12 @@ const CompanyProfile = () => {
             <Form.Group>
               <Form.Control
                 as="select"
-                defaultValue="Are you Registered for Sales Tax?"
+                placeholder="Are you Registered for Sales Tax?"
                 size="lg"
                 name="tax"
                 ref={register({ required: "Tax status is required" })}
               >
-                <option>Are you Registered for Sales Tax?</option>
+                <option>Select...</option>
                 <option value="yes">Yes</option>
                 <option value="No">No</option>
               </Form.Control>
@@ -336,16 +335,14 @@ const CompanyProfile = () => {
               )}
             </Form.Group>
 
-            <Link passRef href="/step2">
-              <Button
-                className={`${styles.submitButton}`}
-                variant="success"
-                type="submit"
-                size="lg"
-              >
-                Next
-              </Button>
-            </Link>
+            <Button
+              className={`${styles.submitButton}`}
+              variant="success"
+              type="submit"
+              size="lg"
+            >
+              Next
+            </Button>
           </Form>
         </Col>
       </Row>

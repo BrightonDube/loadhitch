@@ -1,11 +1,13 @@
 import { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
-import Link from "next/link";
+import { useRouter } from "next/router";
 import { Row, Col, Form, Button, InputGroup } from "react-bootstrap";
 import styles from "../styles/Register.module.css";
 import VehicleType from "../components/VehicleType";
 import FormLayout from "../components/FormLayout";
 import FormNav from "../components/FormNav";
+import { useStateMachine } from "little-state-machine";
+import updateAction from "../components/updateAction";
 import {
   stateOptions,
   provincesOptions,
@@ -13,10 +15,14 @@ import {
   cityOptions,
 } from "../data/data";
 
-const LoadProfile = () => {
+const step2 = () => {
+  const router = useRouter();
   const { register, handleSubmit, errors, watch } = useForm();
+  console.log(useStateMachine(updateAction));
+  const { actions, state } = useStateMachine(updateAction);
   const onSubmit = (data) => {
-    console.log(data);
+    actions.updateAction(data);
+    router.push("./step3");
   };
   const [vehicleCount, setVehicleCount] = useState(0);
   const vehicles = useRef({});
@@ -36,7 +42,6 @@ const LoadProfile = () => {
               <InputGroup>
                 <Form.Control
                   as="select"
-                  defaultValue={null}
                   size="lg"
                   name="vehiclecount"
                   ref={register({
@@ -255,16 +260,15 @@ const LoadProfile = () => {
                 )}
               </Form.Group>
             </Form.Row>
-            <Link href="/step3">
-              <Button
-                className={`${styles.submitButton}`}
-                variant="success"
-                type="submit"
-                size="lg"
-              >
-                Next
-              </Button>
-            </Link>
+
+            <Button
+              className={`${styles.submitButton}`}
+              variant="success"
+              type="submit"
+              size="lg"
+            >
+              Next
+            </Button>
           </Form>
         </Col>
       </Row>
@@ -272,4 +276,4 @@ const LoadProfile = () => {
   );
 };
 
-export default LoadProfile;
+export default step2;
