@@ -1,7 +1,7 @@
 import { Row, Col, Form } from "react-bootstrap";
 import styles from "../styles/Register.module.css";
 import { useForm } from "react-hook-form";
-const VehicleType = (index) => {
+const VehicleType = () => {
   const { register, errors } = useForm();
   return (
     <Row className="justify-content-center w-100 py-5">

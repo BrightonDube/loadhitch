@@ -33,7 +33,7 @@ const step3 = () => {
     } catch (err) {
       console.log(err);
     }
-    router.push("./results");
+    router.push("./dashboard");
   };
   return (
     <FormLayout>

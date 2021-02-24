@@ -72,11 +72,11 @@ const step2 = () => {
               )}
             </Form.Group>
 
-            {/* {Array.from({ length: vehicleCount }, () => ({
+            {Array.from({ length: vehicleCount }, () => ({
               hello: "goodbye",
             })).map((el, index) => (
               <VehicleType key={index} />
-            ))} */}
+            ))}
 
             <Form.Group>
               <Form.Label>Choose your preferred haul type</Form.Label>
