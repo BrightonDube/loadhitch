@@ -32,7 +32,7 @@ function Graph() {
       <h2 className="align-self-center">Trucker Statistics</h2>
       <Bar
         data={data}
-        width={50}
+        width={70}
         height={50}
         options={{
           maintainAspectRatio: false,
