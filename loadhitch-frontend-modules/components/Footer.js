@@ -12,9 +12,9 @@ import styles from "../styles/Footer.module.css";
 const Footer = () => {
   return (
     <footer className={styles.footer}>
-      <Container fluid>
+      <Container>
         <Row>
-          <Col md={6} lg={3} className="text-center text-md-left">
+          <Col sm={6} lg={3} className="text-center text-md-left">
             <h3>SHIPPERS</h3>
             <ul className="list-unstyled">
               <li>
@@ -23,48 +23,48 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/benefits">Benefits</Link>
+                <Link href="/benefits">- Benefits</Link>
               </li>
               <li>
-                <Link href="/industry">Industry</Link>
+                <Link href="/industry">- Industry</Link>
               </li>
               <li>
-                <Link href="/faqs">FAQs</Link>
+                <Link href="/faqs">- FAQs</Link>
               </li>
             </ul>
           </Col>
-          <Col md={6} lg={3} className="text-center text-md-left">
+          <Col sm={6} lg={3} className="text-center text-md-left">
             <h3>CARRIERS</h3>
             <ul className="list-unstyled">
               <li>
-                <Link href="/services">Services</Link>
+                <Link href="/services">- Services</Link>
               </li>
               <li>
-                <Link href="/benefits">Benefits</Link>
+                <Link href="/benefits">- Benefits</Link>
               </li>
               <li>
-                <Link href="/planner">Trip Planner</Link>
+                <Link href="/planner">- Trip Planner</Link>
               </li>
               <li>
-                <Link href="/faqs">FAQs</Link>
+                <Link href="/faqs">- FAQs</Link>
               </li>
             </ul>
           </Col>
-          <Col md={6} lg={3} className="text-center text-md-left">
+          <Col sm={6} lg={3} className="text-center text-md-left">
             <h3>COMPANY</h3>
             <ul className="list-unstyled">
               <li>
-                <Link href="/about">About</Link>
+                <Link href="/about">- About</Link>
               </li>
               <li>
-                <Link href="/careers">Careers</Link>
+                <Link href="/careers">- Careers</Link>
               </li>
               <li>
-                <Link href="/contact">Contact Us</Link>
+                <Link href="/contact">- Contact Us</Link>
               </li>
             </ul>
           </Col>
-          <Col md={6} lg={3} className="text-center text-md-left">
+          <Col sm={6} lg={3} className="text-center text-md-left">
             <h3 className="connect">CONNECT</h3>
             <a href="https://facebook.com">
               <FontAwesomeIcon icon={faFacebook} width="1.5em" />

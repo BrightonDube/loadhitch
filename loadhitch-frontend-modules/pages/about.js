@@ -1,16 +1,26 @@
 import React from "react";
-import { Container } from "react-bootstrap";
+import AboutContent from "../components/AboutContent";
+import Features from "../components/Features/Features";
+import PageBanner from "../components/PageBanner";
+import PartnersCarousel from "../components/PartnersCarousel";
+import Services from "../components/Services/Services";
+import TeamCard from "../components/TeamCards/TeamCards";
 
 const about = () => {
   return (
-    <Container>
-      <h1>About Us</h1>
-      <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aut nobis,
-        sunt nam libero eos saepe distinctio quo porro, delectus consequuntur
-        facilis quaerat repellat. Fugit illo at amet voluptates corrupti iusto.
-      </p>
-    </Container>
+    <>
+      <PageBanner
+        pageTitle="About Us"
+        firstText="Home"
+        secondText="About Us"
+        firstTextLink="/"
+      />
+      <AboutContent />
+      <Features />
+      <Services />
+      <PartnersCarousel />
+      <TeamCard />
+    </>
   );
 };
 

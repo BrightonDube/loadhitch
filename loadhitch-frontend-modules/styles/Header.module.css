@@ -1,14 +1,3 @@
-.bg {
-  height: 100vh;
-  width: 100vw;
-  background: linear-gradient(#0005, #0007),
-    url("../image/trucker.png") no-repeat center;
-  background-size: cover;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 .bg_inner {
   position: relative;
   height: 30%;
@@ -20,12 +9,14 @@
 .bg_inner h1 {
   margin-top: 0 !important;
   font-size: 4em;
+  text-shadow: 4px 4px 15px rgba(150, 150, 150, 0.7);
   font-weight: bolder;
   color: #ffd;
 }
 .bg_inner h2 {
   margin: 50px auto;
   font-size: 3em;
+  text-shadow: 4px 4px 12px rgba(150, 150, 150, 5);
   color: #ffd;
   font-weight: 900;
 }
@@ -34,4 +25,24 @@
   justify-content: center;
   width: 100%;
   padding: 10px;
+}
+
+/*For 1300 Viewport*/
+@media screen and (max-width: 1300px) {
+  .bg_inner h1 {
+    font-size: 3em;
+  }
+  .bg_inner h2 {
+    font-size: 3em;
+  }
+}
+
+/*For 960 ViewPort*/
+@media screen and (max-width: 960px) {
+  .bg_inner h1 {
+    font-size: 2em;
+  }
+  .bg_inner h2 {
+    font-size: 2em;
+  }
 }
