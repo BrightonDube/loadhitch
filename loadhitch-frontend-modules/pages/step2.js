@@ -75,7 +75,7 @@ const step2 = () => {
             {Array.from({ length: vehicleCount }, () => ({
               hello: "goodbye",
             })).map((el, index) => (
-              <VehicleType key={index} />
+              <VehicleType key={index} register={register} errors={errors} />
             ))}
 
             <Form.Group>
