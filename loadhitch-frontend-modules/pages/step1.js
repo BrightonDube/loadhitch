@@ -4,7 +4,7 @@ import { taxOptions, provincesOptions } from "../data/data";
 import styles from "../styles/Register.module.css";
 import Select from "react-select";
 
-const CompanyProfile = () => {
+const step1 = () => {
   const { register, handleSubmit, errors } = useForm();
   const onSubmit = (data) => {
     console.log(data);
@@ -312,4 +312,4 @@ const CompanyProfile = () => {
   );
 };
 
-export default CompanyProfile;
+export default step1;
