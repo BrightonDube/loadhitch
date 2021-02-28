@@ -1,11 +1,14 @@
 import styles from "../styles/Header.module.css";
-
-import { Row } from "react-bootstrap";
+import { Col, Row } from 'react-bootstrap'
 import HeaderText from "./HeaderText";
+import Slider from "./Slider";
+
 const Header = () => (
   <div>
     <Row className="no-gutters text-center">
-      <div className={styles.bg}></div>
+      <Col>
+      <Slider />
+      </Col>
     </Row>
     <Row>
       <HeaderText />

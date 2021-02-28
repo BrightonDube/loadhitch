@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import styles from "../styles/Register.module.css";
 
-const about = () => {
+const login = () => {
   const { register, handleSubmit, errors, watch, reset } = useForm();
 
   const onSubmit = (data, e) => {
@@ -100,4 +100,4 @@ const about = () => {
   );
 };
 
-export default about;
+export default login;

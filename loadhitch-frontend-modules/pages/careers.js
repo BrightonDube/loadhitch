@@ -1,7 +1,7 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 
-const about = () => {
+const careers = () => {
   return (
     <Container>
       <h1>Join Our Team</h1>
@@ -14,4 +14,4 @@ const about = () => {
   );
 };
 
-export default about;
+export default careers;

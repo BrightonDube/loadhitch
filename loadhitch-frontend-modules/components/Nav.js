@@ -1,12 +1,27 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { Container, Navbar, NavDropdown, Nav } from "react-bootstrap";
+import styles from '../styles/Nav.module.css';
 
 const Navi = () => {
   const router = useRouter();
+  const [bgBlack, setBgBlack] = useState(false);
+
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 150) {
+        setBgBlack(true);
+      } else {
+        setBgBlack(false);
+      }
+    })
+  }, []);
+
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-      <Container fluid>
+
+    <Container>
+      <Navbar collapseOnSelect expand="lg" fixed="top" variant="dark" className={bgBlack ? styles.navBlack : ''}>
         <Link href="/" passHref>
           <Navbar.Brand>
             <img
@@ -60,6 +75,21 @@ const Navi = () => {
               >
                 <NavDropdown.Item href="/about">About</NavDropdown.Item>
               </Link>
+              <Link
+                href="/contact"
+                passHref
+                className={router.pathname == "/contact" ? "active" : ""}
+              >
+                <NavDropdown.Item href="/about">Contact</NavDropdown.Item>
+              </Link>
+              <Link
+                href="/faq"
+                passHref
+                className={router.pathname == "/faq" ? "active" : ""}
+              >
+                <NavDropdown.Item href="/faq">FAQ</NavDropdown.Item>
+              </Link>
+              
             </NavDropdown>
           </Nav>
           <Nav>
@@ -81,8 +111,9 @@ const Navi = () => {
             </Link>
           </Nav>
         </Navbar.Collapse>
-      </Container>
-    </Navbar>
+      </Navbar>
+    </Container>
+
   );
 };
 
