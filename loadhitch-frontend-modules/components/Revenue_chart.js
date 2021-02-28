@@ -36,6 +36,7 @@ const data = {
       pointRadius: 1,
       pointHitRadius: 10,
       data: [
+        0,
         2000,
         1950,
         1800,

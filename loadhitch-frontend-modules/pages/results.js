@@ -7,7 +7,6 @@ const results = () => {
   return (
     <>
       <h2>results:</h2>
-
       <pre>{JSON.stringify(state, null, 2)}</pre>
     </>
   );

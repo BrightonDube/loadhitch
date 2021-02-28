@@ -10,27 +10,32 @@ import styles from "../styles/Register.module.css";
 
 const step3 = () => {
   const router = useRouter();
-  const { register, handleSubmit, errors } = useForm();
   const { actions, state } = useStateMachine({ updateAction });
+  const { register, handleSubmit, errors } = useForm(state);
+
+  const dataJson = JSON.stringify(state);
 
   const onSubmit = async (data) => {
     actions.updateAction(data);
 
     try {
-      const res = await fetch("/api/carrierprofile", {
-        body: JSON.stringify({
-          state,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-        method: "POST",
-      });
+      const res = await fetch(
+        "https://8u6y5jqfu7.execute-api.us-east-1.amazonaws.com/dev/v1/carrier",
+        {
+          body: dataJson,
+          headers: {
+            "Content-Type": "application/json",
+          },
+          method: "POST",
+        }
+      );
+
       const result = await res.json();
+      console.log("Success");
     } catch (err) {
       console.log(err);
     }
-    router.push("./dashboard");
+    router.push("./results");
   };
   return (
     <FormLayout>

@@ -1,8 +1,7 @@
 import { Row, Col, Form } from "react-bootstrap";
 import styles from "../styles/Register.module.css";
-import { useForm } from "react-hook-form";
-const VehicleType = ({register, errors}) => {
-  
+
+const VehicleType = ({ register, errors, index }) => {
   return (
     <Row className="justify-content-center w-100 py-5">
       <Form.Label>Select your vehicle type</Form.Label>
@@ -10,9 +9,8 @@ const VehicleType = ({register, errors}) => {
         <Form.Group as={Col} controlId="formGridType">
           <Form.Control
             as="select"
-            defaultValue="Vehicle type"
             size="lg"
-            name="vehicletype"
+            name={`vehicletype ${index + 1}`}
             ref={register({ required: true })}
           >
             <option value="Flatbed">Flatbed</option>
@@ -26,7 +24,7 @@ const VehicleType = ({register, errors}) => {
           <Form.Control
             placeholder="Max Payload (lbs)"
             size="lg"
-            name="payload"
+            name={`payload ${index + 1}`}
             ref={register({ required: true })}
           />
 
@@ -38,7 +36,7 @@ const VehicleType = ({register, errors}) => {
           <Form.Control
             placeholder="Max Capacity (Cu. ft.)"
             size="lg"
-            name="capacity"
+            name={`capacity ${index + 1}`}
             ref={register({ required: true })}
           />
 

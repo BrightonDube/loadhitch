@@ -9,9 +9,8 @@ import updateAction from "./updateAction";
 
 const CompanyProfile = () => {
   const router = useRouter();
-  const { register, handleSubmit, errors } = useForm();
   const { actions, state } = useStateMachine({ updateAction });
-
+  const { register, handleSubmit, errors } = useForm(state);
   const onSubmit = (data) => {
     actions.updateAction(data);
     router.push("./step2");
@@ -84,7 +83,7 @@ const CompanyProfile = () => {
                 size="lg"
                 type="text"
                 placeholder="Company Name"
-                name="companyName"
+                name="carrierCompName"
                 ref={register({
                   required: "Company name required",
                   maxLength: {

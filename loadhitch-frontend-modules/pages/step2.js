@@ -17,8 +17,8 @@ import {
 
 const step2 = () => {
   const router = useRouter();
-  const { register, handleSubmit, errors, watch } = useForm();
   const { actions, state } = useStateMachine({ updateAction });
+  const { register, handleSubmit, errors, watch } = useForm(state);
   const onSubmit = (data) => {
     actions.updateAction(data);
     router.push("./step3");
@@ -42,6 +42,7 @@ const step2 = () => {
                   as="select"
                   size="lg"
                   name="vehiclecount"
+                  defaultValue="0"
                   ref={register({
                     required: "Number of vehicles is required",
                   })}
@@ -75,7 +76,12 @@ const step2 = () => {
             {Array.from({ length: vehicleCount }, () => ({
               hello: "goodbye",
             })).map((el, index) => (
-              <VehicleType key={index} register={register} errors={errors} />
+              <VehicleType
+                key={index}
+                register={register}
+                errors={errors}
+                index={index}
+              />
             ))}
 
             <Form.Group>
