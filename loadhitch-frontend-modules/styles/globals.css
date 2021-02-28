@@ -704,6 +704,14 @@ Services Section
   background-color: #f2f0f9;
 }
 
+.faq-image {
+  object-fit: contain;
+}
+
+.faq-image img{
+  width: 100%;
+}
+
 
 /* Contact Section */
 
