@@ -1,4 +1,4 @@
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { useRouter } from "next/router";
 import { Row, Col, Form, Button } from "react-bootstrap";
 import { taxOptions, provincesOptions } from "../data/data";
@@ -10,7 +10,7 @@ import updateAction from "./updateAction";
 const CompanyProfile = () => {
   const router = useRouter();
   const { actions, state } = useStateMachine({ updateAction });
-  const { register, handleSubmit, errors } = useForm(state);
+  const { register, handleSubmit, errors, control } = useForm(state);
   const onSubmit = (data) => {
     actions.updateAction(data);
     router.push("./step2");
@@ -319,6 +319,19 @@ const CompanyProfile = () => {
             </Form.Group>
 
             <Form.Group>
+              <Controller
+                as={Select}
+                isClearable
+                control={control}
+                className={styles.selectStyle}
+                classNamePrefix={styles.selectStyle}
+                isMulti
+                styles={customStyles}
+                options={taxOptions}
+                placeholder={"What sales tax are you registered for?"}
+                name="taxreg"
+                ref={register({ required: true })}
+              />
               <Select
                 className={styles.selectStyle}
                 classNamePrefix={styles.selectStyle}

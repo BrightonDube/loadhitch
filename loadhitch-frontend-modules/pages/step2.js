@@ -18,7 +18,7 @@ import {
 const step2 = () => {
   const router = useRouter();
   const { actions, state } = useStateMachine({ updateAction });
-  const { register, handleSubmit, errors, watch } = useForm(state);
+  const { register, handleSubmit, errors, watch } = useForm({ state });
   const onSubmit = (data) => {
     actions.updateAction(data);
     router.push("./step3");
@@ -38,6 +38,26 @@ const step2 = () => {
           <Form className="w-90 mx-auto" onSubmit={handleSubmit(onSubmit)}>
             <Form.Group>
               <InputGroup>
+                {/* <select
+                  name="vehiclecount"
+                  ref={register({
+                    required: "Number of vehicles is required",
+                  })}
+                  className="form-control form-control-lg"
+                  defaultValue="0"
+                >
+                  <option>Select your number of Transport Vehicles*</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                </select> */}
                 <Form.Control
                   as="select"
                   size="lg"
